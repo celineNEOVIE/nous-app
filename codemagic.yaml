@@ -4,7 +4,7 @@ workflows:
     max_build_duration: 60
     environment:
       node: 20.17.0
-      java: 17
+      java: 21
     scripts:
       - name: Unzip source
         script: unzip zen-app-connect.zip -d source && cp -r source/* . && rm -rf source
@@ -27,5 +27,3 @@ workflows:
           ./gradlew bundleRelease
     artifacts:
       - android/app/build/outputs/bundle/release/*.aab
- 
-       
