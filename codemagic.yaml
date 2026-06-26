@@ -18,20 +18,4 @@ workflows:
         script: npm run build
       - name: Capacitor add android
         script: npx cap add android
-      - name: Capacitor sync
-        script: npx cap sync android
-      - name: Build AAB
-        script: |
-          cd android
-          echo "android { configurations.all { resolutionStrategy { force 'org.jetbrains.kotlin:kotlin-stdlib:1.8.22'; force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22'; force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22' } } }" >> app/build.gradle
-          ./gradlew bundleRelease
-      - name: Sign AAB
-        script: |
-          jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 \
-            -keystore ../signing.keystore \
-            -storepass Yv3yr54ly69Q \
-            -keypass Yv3yr54ly69Q \
-            android/app/build/outputs/bundle/release/app-release.aab \
-            my-key-alias
-    artifacts:
-      - android/app/build/outputs/bundle/release/*.aab
+      -
