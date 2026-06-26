@@ -1,4 +1,3 @@
-
 workflows:
   android-workflow:
     name: Android Build
@@ -9,6 +8,8 @@ workflows:
     scripts:
       - name: Unzip source
         script: unzip zen-app-connect.zip -d source && cp -r source/* . && rm -rf source
+      - name: Fix App ID
+        script: sed -i 's/app\.lovable\.[a-z0-9]*/fr.app.nous/g' capacitor.config.ts
       - name: Install dependencies
         script: npm install
       - name: Install Capacitor
@@ -25,3 +26,5 @@ workflows:
           ./gradlew bundleRelease
     artifacts:
       - android/app/build/outputs/bundle/release/*.aab
+
+       
