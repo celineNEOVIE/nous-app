@@ -1,3 +1,4 @@
+
 workflows:
   android-workflow:
     name: Android Build
@@ -10,6 +11,8 @@ workflows:
         script: unzip zen-app-connect.zip -d source && cp -r source/* . && rm -rf source
       - name: Install dependencies
         script: npm install
+      - name: Install Capacitor
+        script: npm install @capacitor/core @capacitor/cli @capacitor/android
       - name: Build web
         script: npm run build
       - name: Capacitor add android
