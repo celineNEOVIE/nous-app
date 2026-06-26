@@ -6,6 +6,8 @@ workflows:
       node: 18.17.0
       java: 17
     scripts:
+      - name: Unzip source
+        script: unzip zen-app-connect.zip -d source && cp -r source/* . && rm -rf source
       - name: Install dependencies
         script: npm install
       - name: Build web
