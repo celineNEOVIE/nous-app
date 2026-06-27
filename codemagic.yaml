@@ -66,7 +66,8 @@ workflows:
           xcode-project build-ipa \
             --workspace ios/App/App.xcworkspace \
             --scheme App \
-            --config Release
+            --config Release \
+            --archive-flags="-allowProvisioningUpdates"
     publishing:
       app_store_connect:
         api_key: $APP_STORE_CONNECT_PRIVATE_KEY
