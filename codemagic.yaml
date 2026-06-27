@@ -39,6 +39,8 @@ workflows:
       vars:
         BUNDLE_ID: "fr.app.nous"
         APP_STORE_APP_ID: "6785034254"
+    integrations:
+      app_store_connect: codemagic
     scripts:
       - name: Unzip source
         script: unzip zen-app-connect.zip -d source && rsync -a source/ . && rm -rf source
@@ -76,7 +78,9 @@ workflows:
           grep -r "alwaysOutOfDate" ios/App || echo "Aucune occurrence restante"
       - name: Build and sign IPA
         script: |
-          xcode-project use-profiles
+          xcode-project use-profiles \
+            --type APP_STORE \
+            --bundle-id fr.app.nous
           xcode-project build-ipa \
             --workspace ios/App/App.xcworkspace \
             --scheme App \
