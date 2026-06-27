@@ -48,12 +48,11 @@ workflows:
         script: npm install
       - name: Install Capacitor iOS
         script: npm install @capacitor/core @capacitor/cli @capacitor/ios
-      - name: Patch Capacitor podspecs
+      - name: Show podspec deployment lines
         script: |
           find ./node_modules/@capacitor/ios -name "*.podspec" | while read f; do
-            perl -i -pe "s/s\.ios\.deployment_target = '[^']*'/s.ios.deployment_target = '13.0'/g" "$f" || true
-            perl -i -pe "s/s\.deployment_target = '[^']*'/s.deployment_target = '13.0'/g" "$f" || true
-            echo "Patched: $f"
+            echo "=== $f ==="
+            cat "$f" | grep -i deployment
           done
           exit 0
       - name: Build web
