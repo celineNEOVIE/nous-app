@@ -48,13 +48,20 @@ workflows:
         script: npm install
       - name: Install Capacitor iOS
         script: npm install @capacitor/core @capacitor/cli @capacitor/ios
+      - name: Patch Capacitor podspecs
+        script: |
+          for f in $(find ./node_modules/@capacitor/ios -name "*.podspec"); do
+            sed -i '' "s/s\.ios\.deployment_target = '[^']*'/s.ios.deployment_target = '13.0'/g" "$f"
+            sed -i '' "s/s\.deployment_target = '[^']*'/s.deployment_target = '13.0'/g" "$f"
+            echo "Patched: $f"
+            grep deployment_target "$f"
+          done
       - name: Build web
         script: npm run build
       - name: Capacitor add ios
         script: npx cap add ios || true
       - name: Patch Podfile
-        script: |
-          sed -i '' "s/platform :ios, '[0-9.]*'/platform :ios, '13.0'/" ios/App/Podfile
+        script: sed -i '' "s/platform :ios, '[0-9.]*'/platform :ios, '13.0'/" ios/App/Podfile
       - name: Capacitor sync
         script: npx cap sync ios || true
       - name: Set bundle ID
