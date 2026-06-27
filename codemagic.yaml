@@ -48,14 +48,13 @@ workflows:
         script: npm install
       - name: Install Capacitor iOS
         script: npm install @capacitor/core @capacitor/cli @capacitor/ios
-      - name: Fix deployment target in podspec
-        script: |
-          find ./node_modules/@capacitor/ios -name "Capacitor.podspec" | xargs perl -i -pe "s/s.ios.deployment_target = '[0-9.]+'/s.ios.deployment_target = '14.0'/g"
+      - name: Fix all podspecs deployment target
+        script: find ./node_modules/@capacitor -name "*.podspec" | xargs perl -i -pe "s/s\.(ios\.)?deployment_target\s*=\s*'[0-9.]+'/s.ios.deployment_target = '14.0'/g"
       - name: Build web
         script: npm run build
       - name: Capacitor add ios
         script: npx cap add ios
-      - name: Fix Podfile deployment target
+      - name: Fix Podfile
         script: perl -i -pe "s/platform :ios, '[0-9.]+'/platform :ios, '14.0'/g" ios/App/Podfile
       - name: Capacitor sync
         script: npx cap sync ios
