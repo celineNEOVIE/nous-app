@@ -23,6 +23,56 @@ workflows:
       - name: Update versionCode
         script: cd android && perl -i -pe 's/versionCode 1/versionCode 2/' app/build.gradle
       - name: Build and Sign AAB
-        script: cd android && echo "android { configurations.all { resolutionStrategy { force 'org.jetbrains.kotlin:kotlin-stdlib:1.8.22'; force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22'; force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22' } } }" >> app/build.gradle && ./gradlew bundleRelease && jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore ../signing.keystore -storepass Yv3yr54ly69Q -keypass Yv3yr54ly69Q app/build/outputs/bundle/release/app-release.aab my-key-alias
+        script: cd android && echo "android { configurations.all { resolutionStrategy { force 'org.jetbrains.kotlin:kotlin-stdlib:1.8.22' } } }" >> app/build.gradle && ./gradlew bundleRelease && jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore $CM_KEYSTORE_PATH -storepass $CM_KEYSTORE_PASSWORD -keypass $CM_KEY_PASSWORD app/build/outputs/bundle/release/app-release.aab $CM_KEY_ALIAS
     artifacts:
       - android/app/build/outputs/bundle/release/*.aab
+
+  ios-workflow:
+    name: iOS Build
+    max_build_duration: 60
+    environment:
+      node: 20.17.0
+      xcode: latest
+      cocoapods: default
+      groups:
+        - apple
+      vars:
+        BUNDLE_ID: "fr.app.nous"
+        APP_STORE_APP_ID: "6785034254"
+    scripts:
+      - name: Unzip source
+        script: unzip zen-app-connect.zip -d source && cp -r source/* . && rm -rf source
+      - name: Fix App ID
+        script: perl -i -pe 's/app\.lovable\.[a-zA-Z0-9]*/fr.app.nous/g' capacitor.config.ts
+      - name: Install dependencies
+        script: npm install
+      - name: Install Capacitor iOS
+        script: npm install @capacitor/core @capacitor/cli @capacitor/ios
+      - name: Build web
+        script: npm run build
+      - name: Capacitor add ios
+        script: npx cap add ios
+      - name: Capacitor sync
+        script: npx cap sync ios
+      - name: Set bundle ID
+        script: |
+          cd ios/App
+          xcrun agvtool new-marketing-version 1.0
+          /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier fr.app.nous" App/Info.plist
+      - name: Install pods
+        script: cd ios/App && pod install
+      - name: Build and sign IPA
+        script: |
+          xcode-project use-profiles
+          xcode-project build-ipa \
+            --workspace ios/App/App.xcworkspace \
+            --scheme App
+    publishing:
+      app_store_connect:
+        api_key: $APP_STORE_CONNECT_PRIVATE_KEY
+        key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER
+        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
+        submit_to_testflight: false
+        submit_to_app_store: false
+    artifacts:
+      - build/ios/ipa/*.ipa
