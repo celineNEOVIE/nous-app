@@ -52,10 +52,6 @@ workflows:
         script: |
           perl -i -pe "s/s\.ios\.deployment_target = '15\.0'/s.ios.deployment_target = '13.0'/g" ./node_modules/@capacitor/ios/Capacitor.podspec
           perl -i -pe "s/(Pod::Spec\.new do \|s\|)/\$1\n  s.ios.deployment_target = '13.0'/g" ./node_modules/@capacitor/ios/CapacitorCordova.podspec
-          echo "Patched Capacitor.podspec:"
-          grep deployment ./node_modules/@capacitor/ios/Capacitor.podspec
-          echo "Patched CapacitorCordova.podspec:"
-          grep deployment ./node_modules/@capacitor/ios/CapacitorCordova.podspec || echo "no match"
       - name: Build web
         script: npm run build
       - name: Capacitor add ios
@@ -67,7 +63,7 @@ workflows:
       - name: Set bundle ID
         script: /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier fr.app.nous" ios/App/App/Info.plist
       - name: Install pods
-        script: cd ios/App && pod install
+        script: cd ios/App && pod cache clean --all && pod install
       - name: Build and sign IPA
         script: |
           xcode-project use-profiles
