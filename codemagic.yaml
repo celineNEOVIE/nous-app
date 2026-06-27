@@ -7,7 +7,7 @@ workflows:
       java: 21
     scripts:
       - name: Unzip source
-        script: unzip zen-app-connect.zip -d source && cp -r source/* . && rm -rf source
+        script: unzip zen-app-connect.zip -d source && rsync -a source/ . && rm -rf source
       - name: Fix App ID
         script: perl -i -pe 's/app\.lovable\.[a-zA-Z0-9]*/fr.app.nous/g' capacitor.config.ts
       - name: Install dependencies
@@ -41,4 +41,39 @@ workflows:
         APP_STORE_APP_ID: "6785034254"
     scripts:
       - name: Unzip source
-        script: unzip zen-app-connect.zip -d source && cp -r
+        script: unzip zen-app-connect.zip -d source && rsync -a source/ . && rm -rf source
+      - name: Fix App ID
+        script: perl -i -pe 's/app\.lovable\.[a-zA-Z0-9]*/fr.app.nous/g' capacitor.config.ts
+      - name: Install dependencies
+        script: npm install
+      - name: Install Capacitor iOS
+        script: npm install @capacitor/core @capacitor/cli @capacitor/ios
+      - name: Build web
+        script: npm run build
+      - name: Fix iOS deployment target
+        script: find ./node_modules/@capacitor/ios -name "*.podspec" -exec perl -i -pe 's/s\.ios\.deployment_target\s*=\s*["'"'"'][0-9.]+["'"'"']/s.ios.deployment_target = '"'"'14.0'"'"'/g' {} \;
+      - name: Capacitor add ios
+        script: npx cap add ios
+      - name: Capacitor sync
+        script: npx cap sync ios
+      - name: Set bundle ID
+        script: |
+          /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier fr.app.nous" ios/App/App/Info.plist
+          perl -i -pe 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]+/IPHONEOS_DEPLOYMENT_TARGET = 14.0/g' ios/App/App.xcodeproj/project.pbxproj
+      - name: Install pods
+        script: cd ios/App && pod install
+      - name: Build and sign IPA
+        script: |
+          xcode-project use-profiles
+          xcode-project build-ipa \
+            --workspace ios/App/App.xcworkspace \
+            --scheme App
+    publishing:
+      app_store_connect:
+        api_key: $APP_STORE_CONNECT_PRIVATE_KEY
+        key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER
+        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
+        submit_to_testflight: false
+        submit_to_app_store: false
+    artifacts:
+      - build/ios/ipa/*.ipa
