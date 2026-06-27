@@ -48,22 +48,19 @@ workflows:
         script: npm install
       - name: Install Capacitor iOS
         script: npm install @capacitor/core @capacitor/cli @capacitor/ios
-      - name: Check Capacitor version
-        script: cat node_modules/@capacitor/ios/package.json | grep '"version"'
       - name: Build web
         script: npm run build
       - name: Capacitor add ios
         script: npx cap add ios || true
       - name: Patch Podfile
         script: |
-          sed -i '' "s/platform :ios, '[0-9.]*'/platform :ios, '14.0'/" ios/App/Podfile
-          sed -i '' "s/s.ios.deployment_target = '[0-9.]*'/s.ios.deployment_target = '14.0'/" ios/App/Podfile || true
+          sed -i '' "s/platform :ios, '[0-9.]*'/platform :ios, '13.0'/" ios/App/Podfile
       - name: Capacitor sync
         script: npx cap sync ios || true
       - name: Set bundle ID
         script: /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier fr.app.nous" ios/App/App/Info.plist
       - name: Install pods
-        script: cd ios/App && pod install --repo-update
+        script: cd ios/App && pod install
       - name: Build and sign IPA
         script: |
           xcode-project use-profiles
