@@ -1,4 +1,33 @@
-ios-workflow:
+workflows:
+  android-workflow:
+    name: Android Build
+    max_build_duration: 60
+    environment:
+      node: 20.17.0
+      java: 21
+    scripts:
+      - name: Unzip source
+        script: unzip zen-app-connect.zip -d source && rsync -a source/ . && rm -rf source
+      - name: Fix App ID
+        script: perl -i -pe 's/app\.lovable\.[a-zA-Z0-9]*/fr.app.nous/g' capacitor.config.ts
+      - name: Install dependencies
+        script: npm install
+      - name: Install Capacitor
+        script: npm install @capacitor/core @capacitor/cli @capacitor/android
+      - name: Build web
+        script: npm run build
+      - name: Capacitor add android
+        script: npx cap add android
+      - name: Capacitor sync
+        script: npx cap sync android
+      - name: Update versionCode
+        script: cd android && perl -i -pe 's/versionCode 1/versionCode 2/' app/build.gradle
+      - name: Build and Sign AAB
+        script: cd android && echo "android { configurations.all { resolutionStrategy { force 'org.jetbrains.kotlin:kotlin-stdlib:1.8.22' } } }" >> app/build.gradle && ./gradlew bundleRelease && jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore $CM_KEYSTORE_PATH -storepass $CM_KEYSTORE_PASSWORD -keypass $CM_KEY_PASSWORD app/build/outputs/bundle/release/app-release.aab $CM_KEY_ALIAS
+    artifacts:
+      - android/app/build/outputs/bundle/release/*.aab
+
+  ios-workflow:
     name: iOS Build
     max_build_duration: 60
     environment:
@@ -13,22 +42,16 @@ ios-workflow:
     scripts:
       - name: Unzip source
         script: unzip zen-app-connect.zip -d source && rsync -a source/ . && rm -rf source
-
       - name: Fix App ID
         script: perl -i -pe 's/app\.lovable\.[a-zA-Z0-9]*/fr.app.nous/g' capacitor.config.ts
-
       - name: Install dependencies
         script: npm install
-
       - name: Install Capacitor iOS
         script: npm install @capacitor/core @capacitor/cli @capacitor/ios
-
       - name: Build web
         script: npm run build
-
       - name: Capacitor add ios
         script: npx cap add ios || true
-
       - name: Patch Podfile
         script: |
           PODFILE="ios/App/Podfile"
@@ -37,23 +60,18 @@ ios-workflow:
           printf '\npost_install do |installer|\n  installer.pods_project.targets.each do |target|\n    target.build_configurations.each do |config|\n      config.build_settings['"'"'IPHONEOS_DEPLOYMENT_TARGET'"'"'] = '"'"'15.0'"'"'\n    end\n  end\nend\n' >> "$PODFILE"
           echo "=== Podfile final ==="
           cat "$PODFILE"
-
       - name: Capacitor sync
         script: npx cap sync ios || true
-
       - name: Set bundle ID
         script: /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier fr.app.nous" ios/App/App/Info.plist
-
       - name: Install pods
         script: cd ios/App && pod install --repo-update
-
       - name: Fix Xcode build phases
         script: |
           find ios/App -name "*.pbxproj" | xargs \
             perl -i -pe 's/alwaysOutOfDate = 1;/alwaysOutOfDate = 0;/g'
           echo "Build phases patchées"
           grep -r "alwaysOutOfDate" ios/App || echo "Aucune occurrence restante"
-
       - name: Build and sign IPA
         script: |
           xcode-project use-profiles
@@ -62,7 +80,6 @@ ios-workflow:
             --scheme App \
             --config Release \
             --archive-flags="-allowProvisioningUpdates"
-
     publishing:
       app_store_connect:
         api_key: $APP_STORE_CONNECT_PRIVATE_KEY
@@ -70,6 +87,5 @@ ios-workflow:
         issuer_id: $APP_STORE_CONNECT_ISSUER_ID
         submit_to_testflight: false
         submit_to_app_store: false
-
     artifacts:
       - build/ios/ipa/*.ipa
