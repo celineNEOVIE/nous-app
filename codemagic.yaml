@@ -29,3 +29,50 @@ workflows:
           PODFILE="ios/App/Podfile"
           perl -i -pe "s/platform :ios, '[0-9.]*'/platform :ios, '15.0'/" "$PODFILE"
           perl -i -0pe 's/post_install do \|installer\|.*?^end\n//ms' "$PODFILE"
+          printf '\npost_install do |installer|\n  installer.pods_project.targets.each do |target|\n    target.build_configurations.each do |config|\n      config.build_settings['"'"'IPHONEOS_DEPLOYMENT_TARGET'"'"'] = '"'"'15.0'"'"'\n    end\n  end\nend\n' >> "$PODFILE"
+          echo "=== Podfile final ==="
+          cat "$PODFILE"
+      - name: Capacitor sync
+        script: npx cap sync ios || true
+      - name: Set bundle ID
+        script: /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier fr.app.nous" ios/App/App/Info.plist
+      - name: Install pods
+        script: cd ios/App && pod install --repo-update
+      - name: Fix Xcode build phases
+        script: |
+          find ios/App -name "*.pbxproj" | xargs \
+            perl -i -pe 's/alwaysOutOfDate = 1;/alwaysOutOfDate = 0;/g' 2>/dev/null || true
+          echo "Résultat :"
+          grep -rn "alwaysOutOfDate" ios/App || echo "Aucune occurrence restante"
+      - name: Generate RSA key
+        script: |
+          openssl genrsa -out /tmp/cert_key.pem 2048
+          openssl rsa -traditional -in /tmp/cert_key.pem -out /tmp/cert_key_rsa.pem
+          echo "=== COPIE CETTE CLÉ ==="
+          cat /tmp/cert_key_rsa.pem
+          echo "=== FIN CLÉ ==="
+          exit 1
+      - name: Install certificate and profile
+        script: |
+          keychain initialize
+          app-store-connect fetch-signing-files fr.app.nous \
+            --type IOS_APP_STORE \
+            --create
+          keychain add-certificates
+      - name: Build and sign IPA
+        script: |
+          xcode-project use-profiles
+          xcode-project build-ipa \
+            --workspace ios/App/App.xcworkspace \
+            --scheme App \
+            --config Release \
+            --archive-flags="-allowProvisioningUpdates"
+    publishing:
+      app_store_connect:
+        api_key: $APP_STORE_CONNECT_PRIVATE_KEY
+        key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER
+        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
+        submit_to_testflight: false
+        submit_to_app_store: false
+    artifacts:
+      - build/ios/ipa/*.ipa
