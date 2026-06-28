@@ -46,11 +46,12 @@ workflows:
           grep -rn "alwaysOutOfDate" ios/App || echo "Aucune occurrence restante"
       - name: Install certificate and profile
         script: |
-          echo "$APP_STORE_CONNECT_PRIVATE_KEY" > /tmp/api_key.pem
           keychain initialize
           app-store-connect fetch-signing-files fr.app.nous \
             --type IOS_APP_STORE \
-            --private-key /tmp/api_key.pem \
+            --issuer-id $APP_STORE_CONNECT_ISSUER_ID \
+            --key-id $APP_STORE_CONNECT_KEY_IDENTIFIER \
+            --private-key @env:APP_STORE_CONNECT_PRIVATE_KEY \
             --create
           keychain add-certificates
       - name: Build and sign IPA
