@@ -48,7 +48,9 @@ workflows:
           grep -r "alwaysOutOfDate" ios/App || echo "Aucune occurrence restante"
       - name: Fetch and install profiles
         script: |
-          openssl genrsa -traditional -out /tmp/cert_key.pem 2048
+          openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 | openssl rsa -out /tmp/cert_key.pem
+          echo "=== Format de la clé ==="
+          head -1 /tmp/cert_key.pem
           app-store-connect create-certificate \
             --type IOS_DISTRIBUTION \
             --private-key /tmp/cert_key.pem \
