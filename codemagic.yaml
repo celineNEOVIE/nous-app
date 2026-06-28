@@ -58,7 +58,7 @@ workflows:
             --workspace ios/App/App.xcworkspace \
             --scheme App \
             --config Release \
-            --archive-flags="-allowProvisioningUpdates"
+            --archive-flags="-allowProvisioningUpdates COMPILER_INDEX_STORE_ENABLE=NO"
     publishing:
       app_store_connect:
         api_key: $APP_STORE_CONNECT_PRIVATE_KEY
