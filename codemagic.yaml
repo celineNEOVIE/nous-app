@@ -48,13 +48,12 @@ workflows:
           grep -r "alwaysOutOfDate" ios/App || echo "Aucune occurrence restante"
       - name: Fetch and install profiles
         script: |
-          echo "$APP_STORE_CONNECT_PRIVATE_KEY" > /tmp/cert_key.pem
-          echo "=== Début de la clé ==="
-          head -1 /tmp/cert_key.pem
-          keychain initialize
+          security create-keychain -p "" build.keychain
+          security default-keychain -s build.keychain
+          security unlock-keychain -p "" build.keychain
+          security set-keychain-settings build.keychain
           app-store-connect fetch-signing-files fr.app.nous \
             --type IOS_APP_STORE \
-            --private-key /tmp/cert_key.pem \
             --create
           keychain add-certificates
       - name: Build and sign IPA
@@ -74,4 +73,3 @@ workflows:
         submit_to_app_store: false
     artifacts:
       - build/ios/ipa/*.ipa
-     
