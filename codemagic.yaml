@@ -36,6 +36,11 @@ workflows:
         script: npx cap sync ios || true
       - name: Set bundle ID
         script: /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier fr.app.nous" ios/App/App/Info.plist
+      - name: Fix iOS deployment target
+        script: |
+          find ios/App -name "project.pbxproj" | xargs \
+            perl -i -pe 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]+;/IPHONEOS_DEPLOYMENT_TARGET = 15.0;/g'
+          echo "Deployment target mis à jour"
       - name: Install pods
         script: cd ios/App && pod install --repo-update
       - name: Fix Xcode build phases
