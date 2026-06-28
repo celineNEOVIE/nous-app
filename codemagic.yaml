@@ -46,15 +46,12 @@ workflows:
           grep -rn "alwaysOutOfDate" ios/App || echo "Aucune occurrence restante"
       - name: Install certificate and profile
         script: |
-          openssl genrsa -traditional -out /tmp/cert_key.pem 2048
-          openssl req -new -key /tmp/cert_key.pem \
-            -out /tmp/cert.csr \
-            -subj "/emailAddress=contact@app-nous.fr/CN=Celine Chauchet/C=FR"
+          echo "$APP_STORE_CONNECT_PRIVATE_KEY" > /tmp/api_key.pem
+          keychain initialize
           app-store-connect fetch-signing-files fr.app.nous \
             --type IOS_APP_STORE \
-            --certificate-key /tmp/cert_key.pem \
+            --private-key /tmp/api_key.pem \
             --create
-          keychain initialize
           keychain add-certificates
       - name: Build and sign IPA
         script: |
