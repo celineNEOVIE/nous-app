@@ -76,7 +76,7 @@ workflows:
           grep -r "alwaysOutOfDate" ios/App || echo "Aucune occurrence restante"
       - name: Fetch and install profiles
         script: |
-          echo "$CERTIFICATE_PRIVATE_KEY" > /tmp/cert_key.pem
+          openssl genrsa -out /tmp/cert_key.pem 2048
           app-store-connect fetch-signing-files fr.app.nous \
             --type IOS_APP_STORE \
             --certificate-key /tmp/cert_key.pem \
@@ -99,5 +99,4 @@ workflows:
         submit_to_testflight: false
         submit_to_app_store: false
     artifacts:
-      - build/ios/ipa/*.ipa
       - build/ios/ipa/*.ipa
