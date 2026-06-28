@@ -52,12 +52,13 @@ workflows:
           openssl req -new -key /tmp/cert_key.pem \
             -out /tmp/cert.csr \
             -subj "/emailAddress=contact@app-nous.fr/CN=Celine Chauchet/C=FR"
-          app-store-connect create-certificate \
+          app-store-connect certificates create \
             --type IOS_DISTRIBUTION \
-            --csr-path /tmp/cert.csr \
+            --csr /tmp/cert.csr \
             --save --save-dir /tmp/certs
           keychain initialize
-          keychain add-certificates --certificate /tmp/certs/*.cer \
+          keychain add-certificates \
+            --certificate /tmp/certs/*.cer \
             --certificate-key /tmp/cert_key.pem
           app-store-connect fetch-signing-files fr.app.nous \
             --type IOS_APP_STORE \
