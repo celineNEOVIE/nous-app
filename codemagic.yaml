@@ -48,18 +48,14 @@ workflows:
           grep -r "alwaysOutOfDate" ios/App || echo "Aucune occurrence restante"
       - name: Fetch and install profiles
         script: |
-          openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 | openssl rsa -out /tmp/cert_key.pem
-          echo "=== Format de la clé ==="
+          echo "$CERTIFICATE_PRIVATE_KEY" > /tmp/cert_key.pem
+          echo "=== Début de la clé ==="
           head -1 /tmp/cert_key.pem
-          app-store-connect create-certificate \
-            --type IOS_DISTRIBUTION \
-            --private-key /tmp/cert_key.pem \
-            --save
+          keychain initialize
           app-store-connect fetch-signing-files fr.app.nous \
             --type IOS_APP_STORE \
             --private-key /tmp/cert_key.pem \
             --create
-          keychain initialize
           keychain add-certificates
       - name: Build and sign IPA
         script: |
