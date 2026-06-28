@@ -49,14 +49,16 @@ workflows:
       - name: Install certificate and profile
         script: |
           openssl genrsa -traditional -out /tmp/cert_key.pem 2048
-          echo "$CERTIFICATE" > /tmp/cert.pem
-          openssl pkcs12 -export \
-            -in /tmp/cert.pem \
-            -inkey /tmp/cert_key.pem \
-            -out /tmp/cert.p12 \
-            -passout pass:""
+          openssl req -new -key /tmp/cert_key.pem \
+            -out /tmp/cert.csr \
+            -subj "/emailAddress=contact@app-nous.fr/CN=Celine Chauchet/C=FR"
+          app-store-connect create-certificate \
+            --type IOS_DISTRIBUTION \
+            --csr-path /tmp/cert.csr \
+            --save --save-dir /tmp/certs
           keychain initialize
-          keychain add-certificates --certificate /tmp/cert.p12 --certificate-password ""
+          keychain add-certificates --certificate /tmp/certs/*.cer \
+            --certificate-key /tmp/cert_key.pem
           app-store-connect fetch-signing-files fr.app.nous \
             --type IOS_APP_STORE \
             --create
