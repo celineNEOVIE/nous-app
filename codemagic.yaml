@@ -1,33 +1,4 @@
-workflows:
-  android-workflow:
-    name: Android Build
-    max_build_duration: 60
-    environment:
-      node: 20.17.0
-      java: 21
-    scripts:
-      - name: Unzip source
-        script: unzip zen-app-connect.zip -d source && rsync -a source/ . && rm -rf source
-      - name: Fix App ID
-        script: perl -i -pe 's/app\.lovable\.[a-zA-Z0-9]*/fr.app.nous/g' capacitor.config.ts
-      - name: Install dependencies
-        script: npm install
-      - name: Install Capacitor
-        script: npm install @capacitor/core @capacitor/cli @capacitor/android
-      - name: Build web
-        script: npm run build
-      - name: Capacitor add android
-        script: npx cap add android
-      - name: Capacitor sync
-        script: npx cap sync android
-      - name: Update versionCode
-        script: cd android && perl -i -pe 's/versionCode 1/versionCode 2/' app/build.gradle
-      - name: Build and Sign AAB
-        script: cd android && echo "android { configurations.all { resolutionStrategy { force 'org.jetbrains.kotlin:kotlin-stdlib:1.8.22' } } }" >> app/build.gradle && ./gradlew bundleRelease && jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore $CM_KEYSTORE_PATH -storepass $CM_KEYSTORE_PASSWORD -keypass $CM_KEY_PASSWORD app/build/outputs/bundle/release/app-release.aab $CM_KEY_ALIAS
-    artifacts:
-      - android/app/build/outputs/bundle/release/*.aab
-
-  ios-workflow:
+ios-workflow:
     name: iOS Build
     max_build_duration: 60
     environment:
@@ -77,6 +48,10 @@ workflows:
       - name: Fetch and install profiles
         script: |
           openssl genrsa -out /tmp/cert_key.pem 2048
+          app-store-connect create-certificate \
+            --type IOS_DISTRIBUTION \
+            --certificate-key /tmp/cert_key.pem \
+            --save
           app-store-connect fetch-signing-files fr.app.nous \
             --type IOS_APP_STORE \
             --certificate-key /tmp/cert_key.pem \
