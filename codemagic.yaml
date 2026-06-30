@@ -40,6 +40,13 @@ workflows:
           npx capacitor-assets generate --iconBackgroundColor "#F5F0E6" --iconBackgroundColorDark "#F5F0E6" --splashBackgroundColor "#F5F0E6" --splashBackgroundColorDark "#F5F0E6"
       - name: Set bundle ID
         script: /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier fr.app.nous" ios/App/App/Info.plist
+      - name: Increment build number
+        script: |
+          cd ios/App
+          LATEST=$(app-store-connect get-latest-app-store-build-number "6785034254" || echo 1)
+          NEW_BUILD=$((LATEST + 1))
+          echo "Nouveau build number : $NEW_BUILD"
+          agvtool new-version -all $NEW_BUILD
       - name: Fix iOS deployment target
         script: |
           find ios/App -name "project.pbxproj" | xargs \
