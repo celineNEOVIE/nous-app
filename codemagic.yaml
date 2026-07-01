@@ -37,14 +37,7 @@ workflows:
         script: |
           PODFILE="ios/App/Podfile"
           sed -i '' "s/platform :ios, '[0-9.]*'/platform :ios, '15.0'/" "$PODFILE" || true
-          echo "" >> "$PODFILE"
-          echo "post_install do |installer|" >> "$PODFILE"
-          echo "  installer.pods_project.targets.each do |target|" >> "$PODFILE"
-          echo "    target.build_configurations.each do |config|" >> "$PODFILE"
-          echo "      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'" >> "$PODFILE"
-          echo "    end" >> "$PODFILE"
-          echo "  end" >> "$PODFILE"
-          echo "end" >> "$PODFILE"
+          sed -i '' "s/config.build_settings\['IPHONEOS_DEPLOYMENT_TARGET'\] = .*/config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'/" "$PODFILE" || true
           echo "=== Podfile final ==="
           cat "$PODFILE"
       - name: Set bundle ID
