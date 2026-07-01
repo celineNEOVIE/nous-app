@@ -22,8 +22,8 @@ workflows:
         script: npm install @capacitor/core @capacitor/cli @capacitor/ios
       - name: Build web
         script: npm run build
-      - name: Capacitor add ios
-        script: npx cap add ios || true
+      - name: Capacitor sync
+        script: npx cap sync ios || true
       - name: Patch Podfile
         script: |
           PODFILE="ios/App/Podfile"
@@ -32,18 +32,12 @@ workflows:
           printf '\npost_install do |installer|\n  installer.pods_project.targets.each do |target|\n    target.build_configurations.each do |config|\n      config.build_settings['"'"'IPHONEOS_DEPLOYMENT_TARGET'"'"'] = '"'"'15.0'"'"'\n    end\n  end\nend\n' >> "$PODFILE"
           echo "=== Podfile final ==="
           cat "$PODFILE"
-      - name: Capacitor sync
-        script: npx cap sync ios || true
-      - name: Generate app icons
-        script: |
-          npm install -D @capacitor/assets
-          npx capacitor-assets generate --iconBackgroundColor "#F5F0E6" --iconBackgroundColorDark "#F5F0E6" --splashBackgroundColor "#F5F0E6" --splashBackgroundColorDark "#F5F0E6"
       - name: Set bundle ID
         script: /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier fr.app.nous" ios/App/App/Info.plist
       - name: Increment build number
         script: |
           cd ios/App
-          LATEST=$(app-store-connect get-latest-app-store-build-number "6785034254" || echo 1)
+          LATEST=$(app-store-connect get-latest-app-store-build-number "6785034254" || echo 2)
           NEW_BUILD=$((LATEST + 1))
           echo "Nouveau build number : $NEW_BUILD"
           agvtool new-version -all $NEW_BUILD
