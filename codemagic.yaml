@@ -22,8 +22,17 @@ workflows:
         script: npm install @capacitor/core @capacitor/cli @capacitor/ios
       - name: Build web
         script: npm run build
+      - name: Capacitor add ios
+        script: npx cap add ios || true
       - name: Capacitor sync
         script: npx cap sync ios || true
+      - name: Inject app icons
+        script: |
+          ICON_DIR="ios/App/App/Assets.xcassets/AppIcon.appiconset"
+          mkdir -p "$ICON_DIR"
+          cp -r ios_icons/* "$ICON_DIR/"
+          echo "Icônes injectées :"
+          ls "$ICON_DIR/"
       - name: Patch Podfile
         script: |
           PODFILE="ios/App/Podfile"
