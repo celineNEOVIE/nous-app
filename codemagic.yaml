@@ -53,8 +53,7 @@ workflows:
       - name: Increment build number
         script: |
           cd ios/App
-          LATEST=$(app-store-connect get-latest-app-store-build-number "6785034254" || echo 2)
-          NEW_BUILD=$((LATEST + 1))
+          NEW_BUILD=$(date +%s)
           echo "Nouveau build number : $NEW_BUILD"
           agvtool new-version -all $NEW_BUILD
       - name: Fix iOS deployment target
