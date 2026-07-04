@@ -38,9 +38,17 @@ workflows:
         script: |
           ICON_DIR="ios/App/App/Assets.xcassets/AppIcon.appiconset"
           mkdir -p "$ICON_DIR"
-          cp -r ios_icons/* "$ICON_DIR/"
+          SRC_DIR=$(find . -name "Contents.json" -path "*ios_icons*" -exec dirname {} \; | head -n 1)
+          if [ -z "$SRC_DIR" ]; then
+            echo "ERREUR : Contents.json introuvable dans ios_icons"
+            find . -iname "*ios_icons*"
+            exit 1
+          fi
+          echo "Dossier source trouve : $SRC_DIR"
+          cp "$SRC_DIR"/*.png "$ICON_DIR/" 2>/dev/null || true
+          cp "$SRC_DIR"/Contents.json "$ICON_DIR/"
           echo "Icones injectees :"
-          ls "$ICON_DIR/"
+          ls -la "$ICON_DIR/"
       - name: Patch Podfile
         script: |
           PODFILE="ios/App/Podfile"
