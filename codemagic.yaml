@@ -12,8 +12,16 @@ workflows:
         BUNDLE_ID: "fr.app.nous"
         APP_STORE_APP_ID: "6785034254"
     scripts:
-      - name: Unzip source
-        script: unzip zen-app-connect.zip -d source && rsync -a source/ . && rm -rf source
+     - name: Unzip source
+        script: |
+          unzip zen-app-connect.zip -d source
+          if [ $(find source -mindepth 1 -maxdepth 1 -type d | wc -l) -eq 1 ] && [ $(find source -mindepth 1 -maxdepth 1 -type f | wc -l) -eq 0 ]; then
+            INNER=$(find source -mindepth 1 -maxdepth 1 -type d)
+            rsync -a "$INNER"/ .
+          else
+            rsync -a source/ .
+          fi
+          rm -rf source
       - name: Fix App ID
         script: perl -i -pe 's/app\.lovable\.[a-zA-Z0-9]*/fr.app.nous/g' capacitor.config.ts
       - name: Install dependencies
