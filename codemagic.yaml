@@ -11,6 +11,7 @@ workflows:
       vars:
         BUNDLE_ID: "fr.app.nous"
         APP_STORE_APP_ID: "6785034254"
+        MARKETING_VERSION: "1.1"
     scripts:
       - name: Unzip source
         script: |
@@ -58,6 +59,11 @@ workflows:
           cat "$PODFILE"
       - name: Set bundle ID
         script: /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier fr.app.nous" ios/App/App/Info.plist
+      - name: Set marketing version
+        script: |
+          cd ios/App
+          echo "Nouvelle version produit : $MARKETING_VERSION"
+          agvtool new-marketing-version $MARKETING_VERSION
       - name: Increment build number
         script: |
           cd ios/App
