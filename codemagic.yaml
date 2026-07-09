@@ -143,6 +143,15 @@ workflows:
         script: npm run build
       - name: Capacitor add android
         script: npx cap add android || true
+      - name: Force Kotlin version
+        script: |
+          GRADLE_FILE="android/build.gradle"
+          if ! grep -q "kotlin_version" "$GRADLE_FILE"; then
+            perl -i -pe "s/(buildscript \{)/\$1\n    ext.kotlin_version = '1.8.22'/" "$GRADLE_FILE"
+          fi
+          perl -i -pe "s/ext\.kotlin_version = '[0-9.]+'/ext.kotlin_version = '1.8.22'/" "$GRADLE_FILE"
+          echo "=== android/build.gradle final ==="
+          cat "$GRADLE_FILE"
       - name: Capacitor sync
         script: npx cap sync android || true
       - name: Copy keystore into project
