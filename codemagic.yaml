@@ -143,15 +143,6 @@ workflows:
         script: npm run build
       - name: Capacitor add android
         script: npx cap add android || true
-      - name: Force Kotlin version
-        script: |
-          GRADLE_FILE="android/build.gradle"
-          if ! grep -q "kotlin_version" "$GRADLE_FILE"; then
-            perl -i -pe "s/(buildscript \{)/\$1\n    ext.kotlin_version = '1.8.22'/" "$GRADLE_FILE"
-          fi
-          perl -i -pe "s/ext\.kotlin_version = '[0-9.]+'/ext.kotlin_version = '1.8.22'/" "$GRADLE_FILE"
-          echo "=== android/build.gradle final ==="
-          cat "$GRADLE_FILE"
       - name: Capacitor sync
         script: npx cap sync android || true
       - name: Copy keystore into project
@@ -163,6 +154,18 @@ workflows:
           perl -0777 -i -pe 's/(buildTypes\s*\{\s*release\s*\{)/$1\n            signingConfig signingConfigs.release/s' "$GRADLE_FILE"
           echo "=== build.gradle final ==="
           cat "$GRADLE_FILE"
+      - name: Exclude duplicate Kotlin stdlib
+        script: |
+          GRADLE_FILE="android/app/build.gradle"
+          cat >> "$GRADLE_FILE" << 'EOF'
+
+configurations.all {
+    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'
+    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
+}
+EOF
+          echo "=== app/build.gradle avec exclusion Kotlin ==="
+          tail -10 "$GRADLE_FILE"
       - name: Set version code and name
         script: |
           GRADLE_FILE="android/app/build.gradle"
