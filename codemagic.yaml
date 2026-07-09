@@ -110,3 +110,62 @@ workflows:
         submit_to_app_store: false
     artifacts:
       - build/ios/ipa/*.ipa
+
+  android-workflow:
+    name: Android Build
+    max_build_duration: 60
+    environment:
+      node: 20.17.0
+      java: 21
+      groups:
+        - ANDROID
+      vars:
+        BUNDLE_ID: "fr.app.nous"
+        VERSION_CODE: 1
+        VERSION_NAME: "1.1"
+    scripts:
+      - name: Unzip source
+        script: |
+          unzip zen-app-connect.zip -d source
+          if [ $(find source -mindepth 1 -maxdepth 1 -type d | wc -l) -eq 1 ] && [ $(find source -mindepth 1 -maxdepth 1 -type f | wc -l) -eq 0 ]; then
+            INNER=$(find source -mindepth 1 -maxdepth 1 -type d)
+            rsync -a "$INNER"/ .
+          else
+            rsync -a source/ .
+          fi
+          rm -rf source
+      - name: Fix App ID
+        script: perl -i -pe 's/app\.lovable\.[a-zA-Z0-9]*/fr.app.nous/g' capacitor.config.ts
+      - name: Install dependencies
+        script: npm install
+      - name: Install Capacitor Android
+        script: npm install @capacitor/core @capacitor/cli @capacitor/android
+      - name: Build web
+        script: npm run build
+      - name: Capacitor add android
+        script: npx cap add android || true
+      - name: Capacitor sync
+        script: npx cap sync android || true
+      - name: Copy keystore into project
+        script: cp signing.keystore android/app/signing.keystore
+      - name: Configure signing in build.gradle
+        script: |
+          GRADLE_FILE="android/app/build.gradle"
+          perl -i -pe 's/android \{/android {\n    signingConfigs {\n        release {\n            storeFile file("signing.keystore")\n            storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")\n            keyAlias System.getenv("ANDROID_KEY_ALIAS")\n            keyPassword System.getenv("ANDROID_KEY_PASSWORD")\n        }\n    }/ if $. == 1' "$GRADLE_FILE"
+          perl -0777 -i -pe 's/(buildTypes\s*\{\s*release\s*\{)/$1\n            signingConfig signingConfigs.release/s' "$GRADLE_FILE"
+          echo "=== build.gradle final ==="
+          cat "$GRADLE_FILE"
+      - name: Set version code and name
+        script: |
+          GRADLE_FILE="android/app/build.gradle"
+          NEW_VERSION_CODE=$(date +%s)
+          perl -i -pe "s/versionCode .*/versionCode $NEW_VERSION_CODE/" "$GRADLE_FILE"
+          perl -i -pe "s/versionName .*/versionName \"$VERSION_NAME\"/" "$GRADLE_FILE"
+          echo "Version code: $NEW_VERSION_CODE / Version name: $VERSION_NAME"
+      - name: Build AAB
+        script: |
+          cd android
+          chmod +x gradlew
+          ./gradlew bundleRelease
+    artifacts:
+      - android/app/build/outputs/bundle/release/*.aab
