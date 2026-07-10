@@ -33,7 +33,7 @@ workflows:
         script: npm run build
       - name: Capacitor add ios
         script: npx cap add ios || true
-      - name: Capacitor sync
+      - name: Capacitor sync ios
         script: npx cap sync ios || true
       - name: Inject app icons
         script: |
@@ -121,7 +121,7 @@ workflows:
         - ANDROID
       vars:
         BUNDLE_ID: "fr.app.nous"
-        VERSION_NAME: "1.1"
+        VERSION_NAME: "1.2"
     scripts:
       - name: Unzip source
         script: |
