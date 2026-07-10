@@ -11,7 +11,7 @@ workflows:
       vars:
         BUNDLE_ID: "fr.app.nous"
         APP_STORE_APP_ID: "6785034254"
-        MARKETING_VERSION: "1.1"
+        MARKETING_VERSION: "1.2"
     scripts:
       - name: Unzip source
         script: |
@@ -143,7 +143,7 @@ workflows:
         script: npm run build
       - name: Capacitor add android
         script: npx cap add android || true
-      - name: Capacitor sync
+      - name: Capacitor sync android
         script: npx cap sync android || true
       - name: Copy keystore into project
         script: cp signing.keystore android/app/signing.keystore
