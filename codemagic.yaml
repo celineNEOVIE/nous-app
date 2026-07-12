@@ -11,7 +11,7 @@ workflows:
       vars:
         BUNDLE_ID: "fr.app.nous"
         APP_STORE_APP_ID: "6785034254"
-        MARKETING_VERSION: "1.3"
+        MARKETING_VERSION: "1.4"
     scripts:
       - name: Unzip source
         script: |
