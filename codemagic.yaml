@@ -61,7 +61,7 @@ workflows:
         script: /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier fr.app.nous" ios/App/App/Info.plist
       - name: Add microphone permission
         script: |
-          /usr/libexec/PlistBuddy -c "Add :NSMicrophoneUsageDescription string Cette application utilise le microphone pour vous permettre d'exprimer vos ressentis a la voix dans Mon Plan Perso." ios/App/App/Info.plist
+          /usr/libexec/PlistBuddy -c "Add :NSMicrophoneUsageDescription string Cette application utilise le microphone pour exprimer vos ressentis a la voix dans Mon Plan Perso." ios/App/App/Info.plist
           echo "=== Verification ==="
           /usr/libexec/PlistBuddy -c "Print :NSMicrophoneUsageDescription" ios/App/App/Info.plist
       - name: Set marketing version
