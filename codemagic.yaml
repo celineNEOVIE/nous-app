@@ -11,7 +11,7 @@ workflows:
       vars:
         BUNDLE_ID: "fr.app.nous"
         APP_STORE_APP_ID: "6785034254"
-        MARKETING_VERSION: "1.6"
+        MARKETING_VERSION: "1.7"
     scripts:
       - name: Unzip source
         script: |
@@ -59,11 +59,13 @@ workflows:
           cat "$PODFILE"
       - name: Set bundle ID
         script: /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier fr.app.nous" ios/App/App/Info.plist
-      - name: Add microphone permission
+      - name: Add microphone and speech recognition permissions
         script: |
           /usr/libexec/PlistBuddy -c "Add :NSMicrophoneUsageDescription string Cette application utilise le microphone pour exprimer vos ressentis a la voix dans Mon Plan Perso." ios/App/App/Info.plist
+          /usr/libexec/PlistBuddy -c "Add :NSSpeechRecognitionUsageDescription string Utilise pour dicter votre message dans Mon Plan Perso." ios/App/App/Info.plist
           echo "=== Verification ==="
           /usr/libexec/PlistBuddy -c "Print :NSMicrophoneUsageDescription" ios/App/App/Info.plist
+          /usr/libexec/PlistBuddy -c "Print :NSSpeechRecognitionUsageDescription" ios/App/App/Info.plist
       - name: Set marketing version
         script: |
           cd ios/App
@@ -150,6 +152,15 @@ workflows:
         script: npx cap add android || true
       - name: Capacitor sync android
         script: npx cap sync android || true
+      - name: Add speech recognition permissions
+        script: |
+          MANIFEST="android/app/src/main/AndroidManifest.xml"
+          echo "=== Manifest avant modification ==="
+          cat "$MANIFEST"
+          perl -i -pe 's|(<uses-permission android:name="android.permission.INTERNET" ?/>)|$1\n    <uses-permission android:name="android.permission.RECORD_AUDIO" />|' "$MANIFEST"
+          perl -0777 -i -pe 's|(</application>)|    <queries>\n        <intent>\n            <action android:name="android.speech.RecognitionService" />\n        </intent>\n    </queries>\n$1|' "$MANIFEST"
+          echo "=== Manifest apres modification ==="
+          cat "$MANIFEST"
       - name: Copy keystore into project
         script: cp signing.keystore android/app/signing.keystore
       - name: Configure signing in build.gradle
