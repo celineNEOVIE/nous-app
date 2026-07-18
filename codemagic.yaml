@@ -158,7 +158,7 @@ workflows:
           echo "=== Manifest avant modification ==="
           cat "$MANIFEST"
           perl -i -pe 's|(<uses-permission android:name="android.permission.INTERNET" ?/>)|$1\n    <uses-permission android:name="android.permission.RECORD_AUDIO" />|' "$MANIFEST"
-          perl -0777 -i -pe 's|(</application>)|    <queries>\n        <intent>\n            <action android:name="android.speech.RecognitionService" />\n        </intent>\n    </queries>\n$1|' "$MANIFEST"
+          perl -0777 -i -pe 's|(</manifest>)|    <queries>\n        <intent>\n            <action android:name="android.speech.RecognitionService" />\n        </intent>\n    </queries>\n$1|' "$MANIFEST"
           echo "=== Manifest apres modification ==="
           cat "$MANIFEST"
       - name: Copy keystore into project
