@@ -10,8 +10,7 @@ workflows:
         - APPLE
       vars:
         BUNDLE_ID: "fr.app.nous"
-        APP_STORE_APP_ID: "6785034254"
-        MARKETING_VERSION: "1.8"
+        MARKETING_VERSION: "1.9"
     scripts:
       - name: Unzip source
         script: |
