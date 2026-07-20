@@ -127,7 +127,7 @@ workflows:
         - ANDROID
       vars:
         BUNDLE_ID: "fr.app.nous"
-        VERSION_NAME: "1.4"
+        VERSION_NAME: "1.5"
     scripts:
       - name: Unzip source
         script: |
