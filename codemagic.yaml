@@ -10,7 +10,7 @@ workflows:
         - APPLE
       vars:
         BUNDLE_ID: "fr.app.nous"
-        MARKETING_VERSION: "1.9"
+        MARKETING_VERSION: "2.0"
     scripts:
       - name: Unzip source
         script: |
