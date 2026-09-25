@@ -14,7 +14,7 @@ workflows:
     scripts:
       - name: Unzip source
         script: |
-          unzip -q zen-app-connect.zip -d source
+          unzip -q nous-zen.zip -d source
           rm -rf source/__MACOSX
           echo "=== Structure du zip ==="
           find source -maxdepth 3 -not -path "*/node_modules*" | head -50
@@ -142,7 +142,7 @@ workflows:
     scripts:
       - name: Unzip source
         script: |
-          unzip -q zen-app-connect.zip -d source
+          unzip -q nous-zen.zip -d source
           rm -rf source/__MACOSX
           echo "=== Structure du zip ==="
           find source -maxdepth 3 -not -path "*/node_modules*" | head -50
