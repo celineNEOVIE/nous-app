@@ -180,6 +180,7 @@ workflows:
           cat "$GRADLE_FILE"
           sed -i '' "s/targetSdkVersion = 35/targetSdkVersion = 36/" "$GRADLE_FILE"
           sed -i '' "s/compileSdkVersion = 35/compileSdkVersion = 36/" "$GRADLE_FILE"
+          sed -i '' "s/minSdkVersion = [0-9]*/minSdkVersion = 24/" "$GRADLE_FILE"
           echo "=== variables.gradle apres modification ==="
           cat "$GRADLE_FILE"
       - name: Add speech recognition permissions
