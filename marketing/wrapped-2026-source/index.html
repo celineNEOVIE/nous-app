@@ -24,6 +24,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--cream);col
 .big{font-weight:900;font-size:190px;letter-spacing:-4px;line-height:1}
 .title{font-size:120px;line-height:1}
 .deco{position:absolute}
+.zen{position:absolute;overflow:visible;filter:drop-shadow(0 12px 18px rgba(74,42,33,.22))}
 /* progress bars */
 #prog{position:absolute;top:44px;left:40px;right:40px;display:flex;gap:10px;z-index:100}
 #prog div{flex:1;height:9px;border-radius:9px;background:rgba(74,42,33,.18);overflow:hidden}
@@ -31,14 +32,14 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--cream);col
 #brand{position:absolute;top:78px;left:44px;z-index:100;display:flex;align-items:center;gap:14px;font-size:52px}
 #brand img{width:70px}
 /* bars */
-.chart{display:flex;align-items:flex-end;gap:22px;height:860px;width:920px;padding-bottom:0;border-bottom:5px solid var(--ink)}
+.chart{display:flex;align-items:flex-end;gap:12px;height:860px;width:960px;padding-bottom:0;border-bottom:5px solid var(--ink)}
 .bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;position:relative}
 .bar .col{width:100%;border-radius:22px 22px 6px 6px;background:var(--brown);border:4px solid var(--ink);border-bottom:none;transform-origin:bottom;position:relative}
-.bar .val{font-weight:900;font-size:30px;margin-bottom:12px;white-space:nowrap}
-.bar .m{position:absolute;top:100%;margin-top:14px;line-height:1.1;font-weight:800;font-size:30px;white-space:nowrap}
+.bar .val{font-weight:900;font-size:24px;margin-bottom:12px;white-space:nowrap}
+.bar .m{position:absolute;top:100%;margin-top:14px;line-height:1.1;font-weight:800;font-size:27px;white-space:nowrap}
 .bar.best .col{background:var(--sage-d)}
 /* ranking */
-.rank{display:flex;align-items:center;gap:30px;width:860px;padding:26px 34px;margin:20px 0;text-align:left}
+.rank{display:flex;align-items:center;gap:30px;width:860px;padding:22px 34px;margin:14px 0;text-align:left}
 .rank .n{flex:none;width:96px;height:96px;border-radius:50%;background:var(--ink);color:var(--cream);font-weight:900;font-size:54px;display:flex;align-items:center;justify-content:center}
 .rank .t{font-weight:900;font-size:50px;line-height:1.1}
 .rank .s{font-size:32px;font-weight:700;opacity:.7;margin-top:4px}
@@ -50,6 +51,55 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--cream);col
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute">
+ <defs>
+  <filter id="stk" x="-30%" y="-30%" width="160%" height="160%">
+   <feMorphology in="SourceAlpha" operator="dilate" radius="5" result="d"/>
+   <feFlood flood-color="#FFFDF8"/><feComposite in2="d" operator="in" result="o"/>
+   <feMerge><feMergeNode in="o"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <g id="z-lotus" stroke="#4A2A21" stroke-width="2.6" stroke-linejoin="round">
+   <path d="M50 78C38 66 36 44 50 22c14 22 12 44 0 56z" fill="#F2D9C7"/>
+   <path d="M50 78C34 74 22 58 22 38c16 6 26 22 28 40z" fill="#E8C3A8"/>
+   <path d="M50 78C66 74 78 58 78 38c-16 6-26 22-28 40z" fill="#E8C3A8"/>
+   <path d="M50 80C34 82 16 74 8 60c16-4 32 4 42 20z" fill="#CFDAC2"/>
+   <path d="M50 80c16 2 34-6 42-20-16-4-32 4-42 20z" fill="#CFDAC2"/>
+  </g>
+  <g id="z-leaf" stroke="#4A2A21" stroke-width="2.6" stroke-linecap="round">
+   <path d="M30 92C40 60 52 36 74 10" fill="none"/>
+   <g fill="#B6C6A5"><ellipse cx="34" cy="68" rx="9" ry="15" transform="rotate(-55 34 68)"/><ellipse cx="50" cy="72" rx="8" ry="14" transform="rotate(35 50 72)"/><ellipse cx="44" cy="46" rx="9" ry="15" transform="rotate(-50 44 46)"/><ellipse cx="62" cy="48" rx="8" ry="14" transform="rotate(40 62 48)"/><ellipse cx="60" cy="24" rx="8" ry="13" transform="rotate(-40 60 24)"/><ellipse cx="76" cy="26" rx="7" ry="12" transform="rotate(50 76 26)"/></g>
+  </g>
+  <g id="z-stones" stroke="#4A2A21" stroke-width="2.6">
+   <ellipse cx="50" cy="82" rx="38" ry="12" fill="#A9785A"/>
+   <ellipse cx="50" cy="62" rx="29" ry="10" fill="#D7B596"/>
+   <ellipse cx="50" cy="44" rx="21" ry="8.5" fill="#B6C6A5"/>
+   <ellipse cx="50" cy="28" rx="13" ry="7" fill="#EFE3D1"/>
+  </g>
+  <g id="z-tea" stroke="#4A2A21" stroke-width="2.6" stroke-linecap="round">
+   <path d="M38 30c-6-8 6-12 0-20M52 30c-6-8 6-12 0-20" fill="none"/>
+   <path d="M70 52h6a10 10 0 0 1 0 20h-8" fill="none" stroke-width="5"/>
+   <path d="M18 40h56v18c0 18-12 28-28 28S18 76 18 58z" fill="#CFDAC2"/>
+   <path d="M10 88h72" />
+   <circle cx="46" cy="60" r="7" fill="#D7B596"/>
+  </g>
+  <g id="z-candle" stroke="#4A2A21" stroke-width="2.6" stroke-linejoin="round">
+   <path d="M50 8c10 12 10 22 0 26-10-4-10-14 0-26z" fill="#E9B98A"/>
+   <path d="M50 22c4 5 4 9 0 11-4-2-4-6 0-11z" fill="#FFF3D6"/>
+   <rect x="34" y="38" width="32" height="52" rx="6" fill="#F7F0E5"/>
+   <path d="M34 50c8 4 24 4 32 0" fill="none"/>
+  </g>
+  <g id="z-moon" stroke="#4A2A21" stroke-width="2.6" stroke-linejoin="round">
+   <path d="M58 12a38 38 0 1 0 30 52A30 30 0 1 1 58 12z" fill="#EBD3B5"/>
+   <path d="M78 18l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#B6C6A5"/>
+  </g>
+  <g id="z-heart" stroke="#4A2A21" stroke-width="2.6" stroke-linejoin="round">
+   <path d="M50 86C20 64 10 48 14 32c4-14 24-20 36-4 12-16 32-10 36 4 4 16-6 32-36 54z" fill="#E8C3A8"/>
+  </g>
+  <g id="z-spark" stroke="#4A2A21" stroke-width="2.6" stroke-linejoin="round">
+   <path d="M50 4l10 34 34 12-34 12-10 34-10-34L6 50l34-12z" fill="#B6C6A5"/>
+  </g>
+ </defs>
+</svg>
 <div id="prog"></div>
 <div id="brand"><img src="assets/mascot.png" alt=""><span class="hand">Noûs</span></div>
 
@@ -57,7 +107,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--cream);col
 <section class="scene grid" data-start="0" data-end="4.5">
   <svg class="deco spark" data-in=".9" data-anim="pop" style="left:120px;top:420px" width="90" height="90" viewBox="0 0 24 24"><path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z" fill="#93A784" stroke="#4A2A21" stroke-width=".8"/></svg>
   <svg class="deco spark" data-in="1.1" data-anim="pop" style="right:130px;top:560px" width="64" height="64" viewBox="0 0 24 24"><path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z" fill="#D7B596" stroke="#4A2A21" stroke-width=".8"/></svg>
-  <img class="img-st float" data-in=".2" data-anim="pop" data-rot="-4" src="assets/mascot.png" style="width:640px" alt="">
+  <img class="img-st float" data-in=".2" data-anim="pop" data-rot="-4" src="assets/mascot_zen.png" style="width:680px" alt=""><svg class="zen float" viewBox="0 0 100 100" width="170" height="170" data-in="1.4" data-anim="pop" data-rot="-8" style="left:70px;top:1500px"><use href="#z-lotus" filter="url(#stk)"/></svg><svg class="zen float" viewBox="0 0 100 100" width="170" height="170" data-in="1.6" data-anim="pop" data-rot="10" style="right:60px;top:210px"><use href="#z-leaf" filter="url(#stk)"/></svg><svg class="zen float" viewBox="0 0 100 100" width="150" height="150" data-in="1.8" data-anim="pop" data-rot="6" style="right:90px;top:1460px"><use href="#z-stones" filter="url(#stk)"/></svg>
   <div class="hand title" data-in=".8" data-anim="up" style="font-size:170px;margin-top:30px">Noûs</div>
   <div data-in="1.2" data-anim="pop" data-rot="-3" style="margin-top:30px"><span class="chip sage" style="font-size:50px">WRAPPED 2026</span></div>
   <div class="label" data-in="1.7" data-anim="up" style="margin-top:60px">Notre année bien-être,<br>en chiffres</div>
@@ -66,10 +116,10 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--cream);col
 <!-- 2 · total -->
 <section class="scene bg-sage" data-start="4.5" data-end="9.5">
   <div class="label" data-in=".3" data-anim="up">Cette année, vous avez réservé</div>
-  <div class="big" data-in=".6" data-anim="pop" style="margin:50px 0;font-size:200px"><span data-count="24788" data-cin=".7" data-cdur="2">0</span> €</div>
+  <div class="big" data-in=".6" data-anim="pop" style="margin:50px 0;font-size:200px"><span data-count="25788" data-cin=".7" data-cdur="2">0</span> €</div>
   <div class="label" data-in="1.2" data-anim="up">de séances bien-être<br>avec nos praticien·nes</div>
   <div data-in="2.6" data-anim="pop" data-rot="4" style="margin-top:80px"><span class="chip brown">CRÉDIT D'IMPÔT -50 %</span></div>
-  <img class="img-st deco float" data-in="2.9" data-anim="pop" data-rot="8" src="assets/mascot.png" style="width:300px;right:40px;bottom:120px" alt="">
+  <img class="img-st deco float" data-in="2.9" data-anim="pop" data-rot="8" src="assets/mascot_money.png" style="width:400px;right:30px;bottom:90px" alt=""><svg class="zen float" viewBox="0 0 100 100" width="150" height="150" data-in="3.1" data-anim="pop" data-rot="-6" style="left:70px;top:230px"><use href="#z-stones" filter="url(#stk)"/></svg><svg class="zen float" viewBox="0 0 100 100" width="90" height="90" data-in="3.3" data-anim="pop" data-rot="0" style="left:90px;top:1530px"><use href="#z-spark" filter="url(#stk)"/></svg>
 </section>
 
 <!-- 3 · months -->
@@ -77,6 +127,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--cream);col
   <div class="hand title" data-in=".2" data-anim="up" style="margin-bottom:20px">Mois après mois</div>
   <div class="label" data-in=".5" data-anim="up" style="font-size:38px;margin-bottom:90px;opacity:.8">Chiffre d'affaires 2026</div>
   <div class="chart" id="chart"></div>
+  <img class="img-st deco float" data-in="4.2" data-anim="pop" data-rot="-6" src="assets/mascot_summer.png" style="width:330px;left:70px;top:620px" alt="">
+  <div class="deco" data-in="4.5" data-anim="pop" data-rot="-4" style="left:90px;top:930px"><span class="chip sage" style="font-size:24px;padding:10px 20px">ÉTÉ ZEN</span></div><svg class="zen float" viewBox="0 0 100 100" width="150" height="150" data-in="0.6" data-anim="pop" data-rot="15" style="right:50px;top:200px"><use href="#z-leaf" filter="url(#stk)"/></svg>
   <div style="height:110px"></div>
 </section>
 
@@ -87,15 +139,17 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--cream);col
   <div class="sticker" data-in="1.3" data-anim="pop" data-rot="3" style="padding:30px 60px"><div class="big" style="font-size:170px"><span data-count="6000" data-cin="1.4" data-cdur="1.4">0</span> €</div></div>
   <div data-in="2.6" data-anim="pop" data-rot="-4" style="margin-top:80px"><span class="chip sage">+71 % VS SEPTEMBRE</span></div>
   <div id="confetti"></div>
+  <svg class="zen float" viewBox="0 0 100 100" width="170" height="170" data-in="2.0" data-anim="pop" data-rot="-8" style="left:80px;top:1420px"><use href="#z-candle" filter="url(#stk)"/></svg><svg class="zen float" viewBox="0 0 100 100" width="140" height="140" data-in="2.2" data-anim="pop" data-rot="10" style="right:90px;top:1440px"><use href="#z-heart" filter="url(#stk)"/></svg><svg class="zen float" viewBox="0 0 100 100" width="150" height="150" data-in="2.4" data-anim="pop" data-rot="-10" style="right:80px;top:260px"><use href="#z-moon" filter="url(#stk)"/></svg>
 </section>
 
 <!-- 5 · top requests -->
 <section class="scene bg-sage" data-start="22" data-end="28">
-  <div class="hand title" data-in=".2" data-anim="up" style="margin-bottom:60px">Vos plus grosses<br>demandes</div>
+  <div class="hand title" data-in=".2" data-anim="up" style="margin-bottom:40px">Vos plus grosses<br>demandes</div><svg class="zen float" viewBox="0 0 100 100" width="140" height="140" data-in="0.5" data-anim="pop" data-rot="-10" style="right:50px;top:200px"><use href="#z-lotus" filter="url(#stk)"/></svg>
   <div class="rank sticker" data-in=".8" data-anim="left" data-rot="-1.5"><div class="n">1</div><div><div class="t">Gestion du stress</div><div class="s">anxiété, burn-out, sommeil</div></div></div>
   <div class="rank sticker" data-in="1.4" data-anim="right" data-rot="1.5"><div class="n">2</div><div><div class="t">Relations &amp; couple</div><div class="s">psychothérapie</div></div></div>
   <div class="rank sticker" data-in="2.0" data-anim="left" data-rot="-1"><div class="n">3</div><div><div class="t">Émotions</div><div class="s">psycho-corporel, sophrologie</div></div></div>
   <div class="rank sticker" data-in="2.6" data-anim="right" data-rot="1.2"><div class="n">4</div><div><div class="t">Santé de la femme</div><div class="s">désir d'enfant, maternité</div></div></div>
+  <div data-in="3.2" data-anim="pop" data-rot="2" style="position:relative;margin-top:30px"><img class="img-st" src="assets/mascot_france.png" style="width:400px" alt=""><span class="chip brown" style="position:absolute;right:-250px;top:110px;font-size:26px;padding:12px 22px;transform:rotate(4deg)">EN CABINET<br>OU EN VISIO</span></div>
 </section>
 
 <!-- 6 · best seller -->
@@ -105,13 +159,15 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--cream);col
     <img src="assets/laurence.jpg" class="sticker" style="width:640px;height:640px;object-fit:cover;border-radius:40px;display:block" alt="">
     <div style="position:absolute;top:-30px;left:50%;width:220px;height:62px;margin-left:-110px;background:rgba(207,218,194,.85);transform:rotate(-4deg)"></div>
   </div>
-  <div class="hand" data-in="1.2" data-anim="up" style="font-size:120px;line-height:1;margin-top:70px">Laurence Giudicelli</div>
+  <svg class="zen float" viewBox="0 0 100 100" width="130" height="130" data-in="1.0" data-anim="pop" data-rot="-12" style="right:90px;top:560px"><use href="#z-heart" filter="url(#stk)"/></svg><svg class="zen float" viewBox="0 0 100 100" width="170" height="170" data-in="1.2" data-anim="pop" data-rot="-20" style="left:60px;top:920px"><use href="#z-leaf" filter="url(#stk)"/></svg>
+  <div class="hand" data-in="1.2" data-anim="up" style="font-size:120px;line-height:1;margin-top:70px">Laurence Giudicelli</div><svg class="zen float" viewBox="0 0 100 100" width="90" height="90" data-in="2.4" data-anim="pop" data-rot="0" style="right:110px;top:1640px"><use href="#z-spark" filter="url(#stk)"/></svg>
   <div class="label" data-in="1.5" data-anim="up" style="font-size:40px;margin-top:16px">Psychothérapeute · Art-thérapeute</div>
   <div data-in="2.1" data-anim="pop" data-rot="-2" style="margin-top:50px"><span class="chip sage">★ 4,8 · 60 AVIS GOOGLE</span></div>
 </section>
 
 <!-- 7 · analytics -->
 <section class="scene bg-cream2" data-start="33.5" data-end="40">
+  <img class="img-st deco float" data-in=".5" data-anim="pop" data-rot="6" src="assets/mascot_phone.png" style="width:250px;right:24px;top:150px" alt="">
   <div class="hand title" data-in=".2" data-anim="up">app-nous.fr</div>
   <div class="label" data-in=".4" data-anim="up" style="margin:10px 0 60px">a la cote cette année</div>
   <div class="stats">
@@ -135,15 +191,15 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--cream);col
 
 <!-- 8 · tax credit -->
 <section class="scene bg-brown" data-start="40" data-end="44.5">
-  <img class="img-st float" data-in=".2" data-anim="pop" data-rot="-3" src="assets/mascot_tax.png" style="width:640px" alt="">
+  <img class="img-st float" data-in=".2" data-anim="pop" data-rot="-3" src="assets/mascot_tax.png" style="width:640px" alt=""><svg class="zen float" viewBox="0 0 100 100" width="160" height="160" data-in="1.2" data-anim="pop" data-rot="-8" style="left:70px;top:230px"><use href="#z-tea" filter="url(#stk)"/></svg><svg class="zen float" viewBox="0 0 100 100" width="150" height="150" data-in="2.2" data-anim="pop" data-rot="8" style="right:80px;top:1560px"><use href="#z-candle" filter="url(#stk)"/></svg><svg class="zen float" viewBox="0 0 100 100" width="80" height="80" data-in="2.4" data-anim="pop" data-rot="0" style="left:100px;top:1620px"><use href="#z-spark" filter="url(#stk)"/></svg>
   <div class="big" data-in=".8" data-anim="pop" style="font-size:210px;margin-top:40px">50 %</div>
   <div class="label" data-in="1.1" data-anim="up">de crédit d'impôt sur chaque séance,<br>imposable ou non</div>
-  <div class="sticker" data-in="1.8" data-anim="pop" data-rot="2" style="margin-top:60px;padding:26px 46px"><div class="label" style="font-size:40px">soit jusqu'à <b style="font-size:64px"><span data-count="12394" data-cin="1.9" data-cdur="1.5">0</span> €</b><br>remboursés à nos client·es</div></div>
+  <div class="sticker" data-in="1.8" data-anim="pop" data-rot="2" style="margin-top:60px;padding:26px 46px"><div class="label" style="font-size:40px">soit jusqu'à <b style="font-size:64px"><span data-count="12894" data-cin="1.9" data-cdur="1.5">0</span> €</b><br>remboursés à nos client·es</div></div>
 </section>
 
 <!-- 9 · outro -->
 <section class="scene grid" data-start="44.5" data-end="49">
-  <img class="img-st float" data-in=".2" data-anim="pop" data-rot="4" src="assets/mascot.png" style="width:560px" alt="">
+  <img class="img-st float" data-in=".2" data-anim="pop" data-rot="4" src="assets/mascot.png" style="width:560px" alt=""><svg class="zen float" viewBox="0 0 100 100" width="160" height="160" data-in="0.9" data-anim="pop" data-rot="-10" style="left:60px;top:250px"><use href="#z-lotus" filter="url(#stk)"/></svg><svg class="zen float" viewBox="0 0 100 100" width="140" height="140" data-in="1.1" data-anim="pop" data-rot="8" style="right:70px;top:300px"><use href="#z-stones" filter="url(#stk)"/></svg><svg class="zen float" viewBox="0 0 100 100" width="150" height="150" data-in="1.3" data-anim="pop" data-rot="-6" style="left:70px;top:1500px"><use href="#z-tea" filter="url(#stk)"/></svg><svg class="zen float" viewBox="0 0 100 100" width="130" height="130" data-in="1.5" data-anim="pop" data-rot="12" style="right:80px;top:1520px"><use href="#z-heart" filter="url(#stk)"/></svg><svg class="zen float" viewBox="0 0 100 100" width="150" height="150" data-in="1.7" data-anim="pop" data-rot="25" style="right:40px;top:900px"><use href="#z-leaf" filter="url(#stk)"/></svg><svg class="zen float" viewBox="0 0 100 100" width="120" height="120" data-in="1.9" data-anim="pop" data-rot="-12" style="left:40px;top:860px"><use href="#z-moon" filter="url(#stk)"/></svg>
   <div class="hand title" data-in=".7" data-anim="up" style="font-size:150px;margin-top:40px">Merci !</div>
   <div class="label" data-in="1.1" data-anim="up" style="margin-top:20px">Pour cette belle année<br>à prendre soin de vous</div>
   <div data-in="1.7" data-anim="pop" data-rot="-3" style="margin-top:70px"><span class="chip sage" style="font-size:44px">APP-NOUS.FR</span></div>
@@ -158,16 +214,16 @@ const prog=document.getElementById('prog');
 scenes.forEach(()=>{const d=document.createElement('div');d.appendChild(document.createElement('i'));prog.appendChild(d)});
 
 // bars
-const months=[["Janv.<br>→ Mars",500],['Avril',4335],['Mai',2462],['Juin',4018],['Juil.',3138],['Août',835],['Sept.',3500],['Oct.',6000]];
+const months=[['Janv.',500],['Févr.',500],['Mars',500],['Avril',4335],['Mai',2462],['Juin',4018],['Juil.',3138],['Août',835],['Sept.',3500],['Oct.',6000]];
 const chart=document.getElementById('chart');
 const fmt=(v,d=0)=>v.toLocaleString('fr-FR',{minimumFractionDigits:d,maximumFractionDigits:d}).replace(/ | /g,' ');
 months.forEach(([m,v],i)=>{
   const b=document.createElement('div');b.className='bar'+(v===6000?' best':'');
-  b.innerHTML=`<div class="val" data-in="${1+i*.45+.4}" data-anim="pop">${fmt(v)} €</div><div class="col" data-bar="${1+i*.45}" style="height:${v/6000*720}px"></div><div class="m">${m}</div>`;
+  b.innerHTML=`<div class="val" data-in="${1+i*.4+.4}" data-anim="pop">${fmt(v)} €</div><div class="col" data-bar="${1+i*.4}" style="height:${v/6000*720}px"></div><div class="m">${m}</div>`;
   chart.appendChild(b);
 });
 // crown sticker on best bar
-chart.querySelector('.best').insertAdjacentHTML('afterbegin','<div data-in="5.2" data-anim="pop" data-rot="-8" style="position:absolute;top:-30px;left:50%;margin-left:-150px;width:300px;z-index:3"><span class="chip sage" style="font-size:26px;padding:10px 20px">RECORD</span></div>');
+chart.querySelector('.best').insertAdjacentHTML('afterbegin','<div data-in="5.4" data-anim="pop" data-rot="-8" style="position:absolute;top:-30px;left:50%;margin-left:-150px;width:300px;z-index:3"><span class="chip sage" style="font-size:26px;padding:10px 20px">RECORD</span></div>');
 chart.querySelector('.best').style.position='relative';
 
 // confetti

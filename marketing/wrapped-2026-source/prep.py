@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageChops
 import sys
 IMG='../../images/'
 def cutout(src, out, thr=232, outline=18):
-    im=Image.open(IMG+src).convert('RGB')
+    _o=Image.open(IMG+src).convert('RGBA'); im=Image.new('RGBA',_o.size,(255,255,255,255)); im.alpha_composite(_o); im=im.convert('RGB')
     w,h=im.size
     # mask of near-white
     px=im.load()
@@ -33,8 +33,13 @@ def cutout(src, out, thr=232, outline=18):
     layer=Image.new('RGBA',(W,H),(0,0,0,0)); layer.paste(rgba,(pad,pad),rgba)
     res=Image.alpha_composite(res,layer)
     res.save('assets/'+out); print(out,res.size)
-cutout('1.jpg','mascot.png',thr=175,outline=16)
-cutout('5.webp','mascot_tax.png',thr=232,outline=20)
+#cutout('1.jpg','mascot.png',thr=175,outline=16)
+#cutout('5.webp','mascot_tax.png',thr=232,outline=20)
 # Laurence portrait crop
 p=Image.open(IMG+'3.jpg').convert('RGB')
 p.crop((130,38,590,478)).resize((700,700),Image.LANCZOS).save('assets/laurence.jpg',quality=93)
+cutout('6.webp','mascot_zen.png',thr=225,outline=18)
+cutout('7.webp','mascot_france.png',thr=225,outline=18)
+cutout('8.webp','mascot_money.png',thr=225,outline=18)
+cutout('9.webp','mascot_summer.png',thr=225,outline=18)
+cutout('10.png','mascot_phone.png',thr=225,outline=18)
