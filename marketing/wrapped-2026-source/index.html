@@ -137,7 +137,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--cream);col
   <div class="label" data-in=".5" data-anim="up" style="font-size:38px;margin-bottom:90px;opacity:.8">Chiffre d'affaires 2026</div>
   <div class="chart" id="chart"></div>
   <img class="img-st deco float" data-in="4.2" data-anim="pop" data-rot="-6" src="assets/mascot_summer.png" style="width:330px;left:70px;top:620px" alt="">
-  <div class="deco" data-in="4.5" data-anim="pop" data-rot="-4" style="left:90px;top:930px"><span class="chip sage" style="font-size:22px;padding:10px 18px;line-height:1.2">CRÉATION<br>DE L'APPLI</span></div><svg class="zen float" viewBox="0 0 100 100" width="150" height="150" data-in="0.6" data-anim="pop" data-rot="15" style="right:50px;top:200px"><use href="#z-leaf" filter="url(#stk)"/></svg>
+  <svg class="zen float" viewBox="0 0 100 100" width="150" height="150" data-in="0.6" data-anim="pop" data-rot="15" style="right:50px;top:200px"><use href="#z-leaf" filter="url(#stk)"/></svg>
   <div style="height:110px"></div>
 </section>
 
@@ -175,7 +175,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--cream);col
 <section class="scene bg-cream2" data-start="35" data-end="41.5">
   <img class="img-st deco float" data-in=".5" data-anim="pop" data-rot="6" src="assets/mascot_phone.png" style="width:250px;right:24px;top:150px" alt="">
   <div class="hand title" data-in=".2" data-anim="up">app-nous.fr</div>
-  <div class="label" data-in=".4" data-anim="up" style="margin:10px 0 60px">a la cote cette année</div>
+  <div class="label" data-in=".4" data-anim="up" style="margin:10px 0 0">a la cote depuis son lancement</div>
+  <div data-in=".6" data-anim="pop" data-rot="-2" style="margin:24px 0 50px"><span class="chip sage" style="font-size:26px;padding:10px 22px">DU 22 JUIN À FIN OCTOBRE 2026</span></div>
   <div class="stats">
     <div class="stat sticker" data-in=".7" data-anim="pop" data-rot="-2"><b><span data-count="2.6" data-dec="1" data-cin=".8">0</span>k</b><span>sessions</span></div>
     <div class="stat sticker" data-in=".9" data-anim="pop" data-rot="2"><b><span data-count="2.2" data-dec="1" data-cin="1">0</span>k</b><span>visiteurs</span></div>
@@ -231,6 +232,7 @@ months.forEach(([m,v],i)=>{
 // crown sticker on best bar
 chart.querySelector('.best').insertAdjacentHTML('afterbegin','<div data-in="5.4" data-anim="pop" data-rot="-8" style="position:absolute;top:-30px;left:50%;margin-left:-150px;width:300px;z-index:3"><span class="chip sage" style="font-size:26px;padding:10px 20px">RECORD</span></div>');
 chart.querySelector('.best').style.position='relative';
+chart.children[5].insertAdjacentHTML('afterbegin','<div data-in="4.3" data-anim="pop" data-rot="-3" style="position:absolute;bottom:546px;left:50%;width:280px;margin-left:-140px;z-index:3"><span class="chip sage" style="font-size:22px;padding:10px 18px;line-height:1.2;box-shadow:0 6px 0 var(--ink)">22 JUIN<br>CRÉATION DE L\'APPLI</span><div style="width:0;height:0;margin:14px auto 0;border:14px solid transparent;border-top:18px solid var(--ink);border-bottom:0"></div></div>');
 
 // confetti
 const conf=document.getElementById('confetti');
