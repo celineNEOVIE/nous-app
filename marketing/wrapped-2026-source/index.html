@@ -27,7 +27,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--cream);col
 .lcard{display:flex;align-items:center;gap:40px;width:940px;padding:26px;margin-bottom:46px}
 .lcard img{width:380px;height:380px;object-fit:cover;border-radius:24px;display:block}
 .tape{position:absolute;top:-28px;left:50%;width:150px;height:48px;margin-left:-75px;background:rgba(207,218,194,.9);transform:rotate(-5deg)}
-.pgrid{display:flex;flex-wrap:wrap;justify-content:center;gap:34px 30px;width:960px}
+.pgrid{display:flex;flex-wrap:wrap;justify-content:center;gap:28px 30px;width:960px}
 .pcard{width:280px;padding:14px 14px 18px;border-radius:22px}
 .pcard img{width:252px;height:252px;object-fit:cover;border-radius:14px;display:block}
 .pn{font-size:38px;white-space:nowrap;line-height:1;margin-top:12px}
@@ -163,20 +163,12 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--cream);col
 
 <!-- 6 · praticien·nes -->
 <section class="scene grid" data-start="28" data-end="35">
-  <div class="hand title" data-in=".1" data-anim="up" style="font-size:110px;margin-bottom:34px">Nos praticien·nes</div>
-  <div class="lcard sticker" data-in=".5" data-anim="pop" data-rot="-1.5">
-    <div style="position:relative;flex:none"><img src="assets/laurence.jpg" alt=""><div class="tape"></div></div>
-    <div style="text-align:left">
-      <span class="chip brown" style="font-size:24px;padding:10px 20px;box-shadow:0 6px 0 var(--ink)">N°1 DES VENTES 2026</span>
-      <div class="hand" style="font-size:72px;line-height:1;margin-top:24px">Laurence<br>Giudicelli</div>
-      <div style="font-size:28px;font-weight:800;margin-top:12px;opacity:.8">Psychothérapeute<br>Art-thérapeute</div>
-      <div style="font-size:28px;font-weight:900;margin-top:14px">★ 4,8 · 60 avis Google</div>
-    </div>
-  </div>
-  <div class="pgrid"><div class="pcard sticker" data-in="1.6" data-anim="pop" data-rot="-3"><img src="assets/p_emilie.jpg" alt=""><div class="hand pn">Émilie Béchard</div><div class="ps">Kinésiologue</div><div class="pr">★ 5,0 · 57 avis</div></div><div class="pcard sticker" data-in="1.9" data-anim="pop" data-rot="2.5"><img src="assets/p_camille.jpg" alt=""><div class="hand pn">Camille Chopinot</div><div class="ps">Naturopathe</div><div class="pr">★ 5,0 · 26 avis</div></div><div class="pcard sticker" data-in="2.2" data-anim="pop" data-rot="-2"><img src="assets/p_sophie.jpg" alt=""><div class="hand pn">Sophie Clouet</div><div class="ps">Coach santé</div><div class="pr">★ 5,0 · 26 avis</div></div><div class="pcard sticker" data-in="2.5" data-anim="pop" data-rot="2"><img src="assets/p_valerie.jpg" alt=""><div class="hand pn">Valérie Elineau</div><div class="ps">Sophrologue</div><div class="pr">★ 5,0 · 100 avis</div></div><div class="pcard sticker" data-in="2.8" data-anim="pop" data-rot="-2.5"><img src="assets/p_nathalie.jpg" alt=""><div class="hand pn">Nathalie Garnier</div><div class="ps">Méditation</div></div></div>
-  <svg class="zen float" viewBox="0 0 100 100" width="120" height="120" data-in="1.0" data-anim="pop" data-rot="-12" style="right:40px;top:300px"><use href="#z-heart" filter="url(#stk)"/></svg>
-  <svg class="zen float" viewBox="0 0 100 100" width="130" height="130" data-in="1.2" data-anim="pop" data-rot="-10" style="left:40px;bottom:150px"><use href="#z-lotus" filter="url(#stk)"/></svg>
-  <svg class="zen float" viewBox="0 0 100 100" width="80" height="80" data-in="3.4" data-anim="pop" style="right:70px;bottom:120px"><use href="#z-spark" filter="url(#stk)"/></svg>
+  <div class="hand title" data-in=".1" data-anim="up" style="font-size:110px">Nos praticien·nes</div>
+  <div data-in=".4" data-anim="pop" data-rot="-2" style="margin:26px 0 50px"><span class="chip brown" style="font-size:34px">N°1 DES VENTES EN 2026</span></div>
+  <div class="pgrid"><div class="pcard sticker" data-in="0.90" data-anim="pop" data-rot="-2.5"><img src="assets/p_emilie.jpg" alt=""><div class="hand pn">Émilie Béchard</div><div class="ps">Kinésiologue</div><div class=pr>★ 5,0 · 57 avis</div></div><div class="pcard sticker" data-in="1.15" data-anim="pop" data-rot="2"><img src="assets/p_camille.jpg" alt=""><div class="hand pn">Camille Chopinot</div><div class="ps">Naturopathe</div><div class=pr>★ 5,0 · 26 avis</div></div><div class="pcard sticker" data-in="1.40" data-anim="pop" data-rot="-1.5"><img src="assets/p_sophie.jpg" alt=""><div class="hand pn">Sophie Clouet</div><div class="ps">Coach santé</div><div class=pr>★ 5,0 · 26 avis</div></div><div class="pcard sticker" data-in="1.65" data-anim="pop" data-rot="2.5"><img src="assets/p_oceane.jpg" alt=""><div class="hand pn">Océane Danjon</div><div class="ps">Psycho-corporel</div><div class=pr>★ 5,0 · 32 avis</div></div><div class="pcard sticker" data-in="1.90" data-anim="pop" data-rot="-2"><img src="assets/p_valerie.jpg" alt=""><div class="hand pn">Valérie Elineau</div><div class="ps">Sophrologue</div><div class=pr>★ 5,0 · 100 avis</div></div><div class="pcard sticker" data-in="2.15" data-anim="pop" data-rot="1.5"><img src="assets/p_nathalie.jpg" alt=""><div class="hand pn">Nathalie Garnier</div><div class="ps">Méditation</div></div><div class="pcard sticker" data-in="2.40" data-anim="pop" data-rot="-2.5"><img src="assets/p_laurence.jpg" alt=""><div class="hand pn">Laurence Giudicelli</div><div class="ps">Psychothérapeute</div><div class=pr>★ 4,8 · 60 avis</div></div><div class="pcard sticker" data-in="2.65" data-anim="pop" data-rot="2"><img src="assets/p_clara.jpg" alt=""><div class="hand pn">Clara Regnier</div><div class="ps">Thérapeute holistique</div></div></div>
+  <svg class="zen float" viewBox="0 0 100 100" width="120" height="120" data-in="1.0" data-anim="pop" data-rot="-12" style="right:40px;top:200px"><use href="#z-heart" filter="url(#stk)"/></svg>
+  <svg class="zen float" viewBox="0 0 100 100" width="120" height="120" data-in="1.2" data-anim="pop" data-rot="-10" style="left:40px;top:220px"><use href="#z-lotus" filter="url(#stk)"/></svg>
+  <svg class="zen float" viewBox="0 0 100 100" width="80" height="80" data-in="3.4" data-anim="pop" style="right:70px;bottom:90px"><use href="#z-spark" filter="url(#stk)"/></svg>
 </section>
 
 <!-- 7 · analytics -->
