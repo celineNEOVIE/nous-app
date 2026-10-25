@@ -1,0 +1,289 @@
+{
+  "palette": [
+    {
+      "nom": "creme",
+      "hex": "#F7F0E5",
+      "rgb_0_255": [
+        247,
+        240,
+        229
+      ],
+      "srgb_0_1": [
+        0.9686,
+        0.9412,
+        0.898
+      ],
+      "blender_lineaire_0_1": [
+        0.9301,
+        0.8714,
+        0.7835
+      ],
+      "usage": "Fond principal (+ quadrillage papier)"
+    },
+    {
+      "nom": "creme-fonce",
+      "hex": "#EFE3D1",
+      "rgb_0_255": [
+        239,
+        227,
+        209
+      ],
+      "srgb_0_1": [
+        0.9373,
+        0.8902,
+        0.8196
+      ],
+      "blender_lineaire_0_1": [
+        0.8632,
+        0.7682,
+        0.6376
+      ],
+      "usage": "Fond secondaire (page chiffres du site)"
+    },
+    {
+      "nom": "marron-clair",
+      "hex": "#D7B596",
+      "rgb_0_255": [
+        215,
+        181,
+        150
+      ],
+      "srgb_0_1": [
+        0.8431,
+        0.7098,
+        0.5882
+      ],
+      "blender_lineaire_0_1": [
+        0.6795,
+        0.4621,
+        0.305
+      ],
+      "usage": "Fond pages « meilleur mois » / « crédit d'impôt », barres du graphique, pastilles marron"
+    },
+    {
+      "nom": "marron-moyen",
+      "hex": "#A9785A",
+      "rgb_0_255": [
+        169,
+        120,
+        90
+      ],
+      "srgb_0_1": [
+        0.6627,
+        0.4706,
+        0.3529
+      ],
+      "blender_lineaire_0_1": [
+        0.3968,
+        0.1878,
+        0.1022
+      ],
+      "usage": "Galet du bas, confettis"
+    },
+    {
+      "nom": "encre",
+      "hex": "#4A2A21",
+      "rgb_0_255": [
+        74,
+        42,
+        33
+      ],
+      "srgb_0_1": [
+        0.2902,
+        0.1647,
+        0.1294
+      ],
+      "blender_lineaire_0_1": [
+        0.0685,
+        0.0232,
+        0.0152
+      ],
+      "usage": "Textes, contours, ombres dures des pastilles, flèche"
+    },
+    {
+      "nom": "sauge-clair",
+      "hex": "#CFDAC2",
+      "rgb_0_255": [
+        207,
+        218,
+        194
+      ],
+      "srgb_0_1": [
+        0.8118,
+        0.8549,
+        0.7608
+      ],
+      "blender_lineaire_0_1": [
+        0.624,
+        0.7011,
+        0.5395
+      ],
+      "usage": "Fond pages « total » / « demandes », pastilles sauge, scotch washi"
+    },
+    {
+      "nom": "sauge",
+      "hex": "#93A784",
+      "rgb_0_255": [
+        147,
+        167,
+        132
+      ],
+      "srgb_0_1": [
+        0.5765,
+        0.6549,
+        0.5176
+      ],
+      "blender_lineaire_0_1": [
+        0.2918,
+        0.3864,
+        0.2307
+      ],
+      "usage": "Barre record (octobre), étoiles, confettis"
+    },
+    {
+      "nom": "sauge-feuille",
+      "hex": "#B6C6A5",
+      "rgb_0_255": [
+        182,
+        198,
+        165
+      ],
+      "srgb_0_1": [
+        0.7137,
+        0.7765,
+        0.6471
+      ],
+      "blender_lineaire_0_1": [
+        0.4678,
+        0.5647,
+        0.3763
+      ],
+      "usage": "Feuilles d'eucalyptus, galet, étoile de la lune"
+    },
+    {
+      "nom": "blanc-autocollant",
+      "hex": "#FFFDF8",
+      "rgb_0_255": [
+        255,
+        253,
+        248
+      ],
+      "srgb_0_1": [
+        1.0,
+        0.9922,
+        0.9725
+      ],
+      "blender_lineaire_0_1": [
+        1.0,
+        0.9823,
+        0.9387
+      ],
+      "usage": "Contour blanc des autocollants, cartes"
+    },
+    {
+      "nom": "peche-clair",
+      "hex": "#F2D9C7",
+      "rgb_0_255": [
+        242,
+        217,
+        199
+      ],
+      "srgb_0_1": [
+        0.949,
+        0.851,
+        0.7804
+      ],
+      "blender_lineaire_0_1": [
+        0.8879,
+        0.6939,
+        0.5711
+      ],
+      "usage": "Pétale central du lotus"
+    },
+    {
+      "nom": "peche",
+      "hex": "#E8C3A8",
+      "rgb_0_255": [
+        232,
+        195,
+        168
+      ],
+      "srgb_0_1": [
+        0.9098,
+        0.7647,
+        0.6588
+      ],
+      "blender_lineaire_0_1": [
+        0.807,
+        0.5457,
+        0.3916
+      ],
+      "usage": "Pétales du lotus, cœur"
+    },
+    {
+      "nom": "sable",
+      "hex": "#EBD3B5",
+      "rgb_0_255": [
+        235,
+        211,
+        181
+      ],
+      "srgb_0_1": [
+        0.9216,
+        0.8275,
+        0.7098
+      ],
+      "blender_lineaire_0_1": [
+        0.8308,
+        0.6514,
+        0.4621
+      ],
+      "usage": "Lune"
+    },
+    {
+      "nom": "flamme",
+      "hex": "#E9B98A",
+      "rgb_0_255": [
+        233,
+        185,
+        138
+      ],
+      "srgb_0_1": [
+        0.9137,
+        0.7255,
+        0.5412
+      ],
+      "blender_lineaire_0_1": [
+        0.8148,
+        0.4851,
+        0.2542
+      ],
+      "usage": "Flamme de la bougie"
+    },
+    {
+      "nom": "flamme-coeur",
+      "hex": "#FFF3D6",
+      "rgb_0_255": [
+        255,
+        243,
+        214
+      ],
+      "srgb_0_1": [
+        1.0,
+        0.9529,
+        0.8392
+      ],
+      "blender_lineaire_0_1": [
+        1.0,
+        0.8963,
+        0.6724
+      ],
+      "usage": "Cœur de la flamme"
+    }
+  ],
+  "effets": {
+    "quadrillage": "rgba(150,120,95,0.13), traits de 2 px tous les 54 px (vidéo 1080x1920)",
+    "ombre_autocollant": "0 18px 40px rgba(74,42,33,0.22)",
+    "ombre_pastille": "décalage 0 10px, #4A2A21, sans flou"
+  }
+}

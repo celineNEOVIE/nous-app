@@ -1,0 +1,16 @@
+:root{
+  --creme:#F7F0E5; /* Fond principal (+ quadrillage papier) */
+  --creme-fonce:#EFE3D1; /* Fond secondaire (page chiffres du site) */
+  --marron-clair:#D7B596; /* Fond pages « meilleur mois » / « crédit d'impôt », barres du graphique, pastilles marron */
+  --marron-moyen:#A9785A; /* Galet du bas, confettis */
+  --encre:#4A2A21; /* Textes, contours, ombres dures des pastilles, flèche */
+  --sauge-clair:#CFDAC2; /* Fond pages « total » / « demandes », pastilles sauge, scotch washi */
+  --sauge:#93A784; /* Barre record (octobre), étoiles, confettis */
+  --sauge-feuille:#B6C6A5; /* Feuilles d'eucalyptus, galet, étoile de la lune */
+  --blanc-autocollant:#FFFDF8; /* Contour blanc des autocollants, cartes */
+  --peche-clair:#F2D9C7; /* Pétale central du lotus */
+  --peche:#E8C3A8; /* Pétales du lotus, cœur */
+  --sable:#EBD3B5; /* Lune */
+  --flamme:#E9B98A; /* Flamme de la bougie */
+  --flamme-coeur:#FFF3D6; /* Cœur de la flamme */
+}
