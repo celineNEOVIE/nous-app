@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Noûs Wrapped 2026</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+:root{
+  --cream:#F7F0E5; --cream2:#EFE3D1; --brown:#D7B596; --brown-d:#A9785A; --ink:#4A2A21;
+  --sage:#CFDAC2; --sage-d:#93A784; --white:#FFFDF8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--cream);color:var(--ink);font-family:'Nunito',sans-serif}
+.hand{font-family:'Caveat',cursive;font-weight:700}
+.scene{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 80px}
+.grid{background-color:var(--cream);background-image:linear-gradient(rgba(150,120,95,.13) 2px,transparent 2px),linear-gradient(90deg,rgba(150,120,95,.13) 2px,transparent 2px);background-size:54px 54px}
+.bg-sage{background:var(--sage)} .bg-brown{background:var(--brown)} .bg-cream2{background:var(--cream2)} .bg-cream{background:var(--cream)}
+[data-in]{opacity:0}
+.sticker{background:var(--white);border-radius:36px;box-shadow:0 0 0 10px var(--white),0 18px 40px rgba(74,42,33,.22)}
+.chip{display:inline-block;background:var(--white);color:var(--ink);font-weight:900;letter-spacing:.08em;font-size:34px;padding:16px 34px;border-radius:999px;border:4px solid var(--ink);box-shadow:0 10px 0 var(--ink)}
+.chip.sage{background:var(--sage)} .chip.brown{background:var(--brown)}
+.img-st{filter:drop-shadow(0 16px 26px rgba(74,42,33,.25))}
+.label{font-size:46px;font-weight:800;line-height:1.25}
+.big{font-weight:900;font-size:190px;letter-spacing:-4px;line-height:1}
+.title{font-size:120px;line-height:1}
+.deco{position:absolute}
+/* progress bars */
+#prog{position:absolute;top:44px;left:40px;right:40px;display:flex;gap:10px;z-index:100}
+#prog div{flex:1;height:9px;border-radius:9px;background:rgba(74,42,33,.18);overflow:hidden}
+#prog i{display:block;height:100%;width:0;background:var(--ink)}
+#brand{position:absolute;top:78px;left:44px;z-index:100;display:flex;align-items:center;gap:14px;font-size:52px}
+#brand img{width:70px}
+/* bars */
+.chart{display:flex;align-items:flex-end;gap:22px;height:860px;width:920px;padding-bottom:0;border-bottom:5px solid var(--ink)}
+.bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;position:relative}
+.bar .col{width:100%;border-radius:22px 22px 6px 6px;background:var(--brown);border:4px solid var(--ink);border-bottom:none;transform-origin:bottom;position:relative}
+.bar .val{font-weight:900;font-size:30px;margin-bottom:12px;white-space:nowrap}
+.bar .m{position:absolute;top:100%;margin-top:14px;line-height:1.1;font-weight:800;font-size:30px;white-space:nowrap}
+.bar.best .col{background:var(--sage-d)}
+/* ranking */
+.rank{display:flex;align-items:center;gap:30px;width:860px;padding:26px 34px;margin:20px 0;text-align:left}
+.rank .n{flex:none;width:96px;height:96px;border-radius:50%;background:var(--ink);color:var(--cream);font-weight:900;font-size:54px;display:flex;align-items:center;justify-content:center}
+.rank .t{font-weight:900;font-size:50px;line-height:1.1}
+.rank .s{font-size:32px;font-weight:700;opacity:.7;margin-top:4px}
+/* stats */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:44px;width:900px}
+.stat{padding:34px 20px 30px}
+.stat b{display:block;font-size:110px;font-weight:900;line-height:1}
+.stat > span{font-size:36px;font-weight:800;opacity:.75}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div id="brand"><img src="assets/mascot.png" alt=""><span class="hand">Noûs</span></div>
+
+<!-- 1 · intro -->
+<section class="scene grid" data-start="0" data-end="4.5">
+  <svg class="deco spark" data-in=".9" data-anim="pop" style="left:120px;top:420px" width="90" height="90" viewBox="0 0 24 24"><path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z" fill="#93A784" stroke="#4A2A21" stroke-width=".8"/></svg>
+  <svg class="deco spark" data-in="1.1" data-anim="pop" style="right:130px;top:560px" width="64" height="64" viewBox="0 0 24 24"><path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z" fill="#D7B596" stroke="#4A2A21" stroke-width=".8"/></svg>
+  <img class="img-st float" data-in=".2" data-anim="pop" data-rot="-4" src="assets/mascot.png" style="width:640px" alt="">
+  <div class="hand title" data-in=".8" data-anim="up" style="font-size:170px;margin-top:30px">Noûs</div>
+  <div data-in="1.2" data-anim="pop" data-rot="-3" style="margin-top:30px"><span class="chip sage" style="font-size:50px">WRAPPED 2026</span></div>
+  <div class="label" data-in="1.7" data-anim="up" style="margin-top:60px">Notre année bien-être,<br>en chiffres</div>
+</section>
+
+<!-- 2 · total -->
+<section class="scene bg-sage" data-start="4.5" data-end="9.5">
+  <div class="label" data-in=".3" data-anim="up">Cette année, vous avez réservé</div>
+  <div class="big" data-in=".6" data-anim="pop" style="margin:50px 0;font-size:200px"><span data-count="24788" data-cin=".7" data-cdur="2">0</span> €</div>
+  <div class="label" data-in="1.2" data-anim="up">de séances bien-être<br>avec nos praticien·nes</div>
+  <div data-in="2.6" data-anim="pop" data-rot="4" style="margin-top:80px"><span class="chip brown">CRÉDIT D'IMPÔT -50 %</span></div>
+  <img class="img-st deco float" data-in="2.9" data-anim="pop" data-rot="8" src="assets/mascot.png" style="width:300px;right:40px;bottom:120px" alt="">
+</section>
+
+<!-- 3 · months -->
+<section class="scene bg-cream" data-start="9.5" data-end="17">
+  <div class="hand title" data-in=".2" data-anim="up" style="margin-bottom:20px">Mois après mois</div>
+  <div class="label" data-in=".5" data-anim="up" style="font-size:38px;margin-bottom:90px;opacity:.8">Chiffre d'affaires 2026</div>
+  <div class="chart" id="chart"></div>
+  <div style="height:110px"></div>
+</section>
+
+<!-- 4 · best month -->
+<section class="scene bg-brown" data-start="17" data-end="22">
+  <div class="label" data-in=".3" data-anim="up">Notre meilleur mois</div>
+  <div class="hand" data-in=".7" data-anim="pop" data-rot="-5" style="font-size:280px;line-height:1;margin:30px 0 10px">Octobre</div>
+  <div class="sticker" data-in="1.3" data-anim="pop" data-rot="3" style="padding:30px 60px"><div class="big" style="font-size:170px"><span data-count="6000" data-cin="1.4" data-cdur="1.4">0</span> €</div></div>
+  <div data-in="2.6" data-anim="pop" data-rot="-4" style="margin-top:80px"><span class="chip sage">+71 % VS SEPTEMBRE</span></div>
+  <div id="confetti"></div>
+</section>
+
+<!-- 5 · top requests -->
+<section class="scene bg-sage" data-start="22" data-end="28">
+  <div class="hand title" data-in=".2" data-anim="up" style="margin-bottom:60px">Vos plus grosses<br>demandes</div>
+  <div class="rank sticker" data-in=".8" data-anim="left" data-rot="-1.5"><div class="n">1</div><div><div class="t">Gestion du stress</div><div class="s">anxiété, burn-out, sommeil</div></div></div>
+  <div class="rank sticker" data-in="1.4" data-anim="right" data-rot="1.5"><div class="n">2</div><div><div class="t">Relations &amp; couple</div><div class="s">psychothérapie</div></div></div>
+  <div class="rank sticker" data-in="2.0" data-anim="left" data-rot="-1"><div class="n">3</div><div><div class="t">Émotions</div><div class="s">psycho-corporel, sophrologie</div></div></div>
+  <div class="rank sticker" data-in="2.6" data-anim="right" data-rot="1.2"><div class="n">4</div><div><div class="t">Santé de la femme</div><div class="s">désir d'enfant, maternité</div></div></div>
+</section>
+
+<!-- 6 · best seller -->
+<section class="scene grid" data-start="28" data-end="33.5">
+  <div data-in=".2" data-anim="pop" data-rot="-3" style="margin-bottom:60px"><span class="chip brown" style="font-size:40px">PRATICIENNE N°1 DE L'ANNÉE</span></div>
+  <div data-in=".6" data-anim="pop" data-rot="3" style="position:relative">
+    <img src="assets/laurence.jpg" class="sticker" style="width:640px;height:640px;object-fit:cover;border-radius:40px;display:block" alt="">
+    <div style="position:absolute;top:-30px;left:50%;width:220px;height:62px;margin-left:-110px;background:rgba(207,218,194,.85);transform:rotate(-4deg)"></div>
+  </div>
+  <div class="hand" data-in="1.2" data-anim="up" style="font-size:120px;line-height:1;margin-top:70px">Laurence Giudicelli</div>
+  <div class="label" data-in="1.5" data-anim="up" style="font-size:40px;margin-top:16px">Psychothérapeute · Art-thérapeute</div>
+  <div data-in="2.1" data-anim="pop" data-rot="-2" style="margin-top:50px"><span class="chip sage">★ 4,8 · 60 AVIS GOOGLE</span></div>
+</section>
+
+<!-- 7 · analytics -->
+<section class="scene bg-cream2" data-start="33.5" data-end="40">
+  <div class="hand title" data-in=".2" data-anim="up">app-nous.fr</div>
+  <div class="label" data-in=".4" data-anim="up" style="margin:10px 0 60px">a la cote cette année</div>
+  <div class="stats">
+    <div class="stat sticker" data-in=".7" data-anim="pop" data-rot="-2"><b><span data-count="2.6" data-dec="1" data-cin=".8">0</span>k</b><span>sessions</span></div>
+    <div class="stat sticker" data-in=".9" data-anim="pop" data-rot="2"><b><span data-count="2.2" data-dec="1" data-cin="1">0</span>k</b><span>visiteurs</span></div>
+    <div class="stat sticker" data-in="1.1" data-anim="pop" data-rot="1.5"><b><span data-count="4.4" data-dec="1" data-cin="1.2">0</span>k</b><span>pages vues</span></div>
+    <div class="stat sticker" data-in="1.3" data-anim="pop" data-rot="-1.5"><b><span data-count="12" data-cin="1.4">0</span>k</b><span>interactions</span></div>
+  </div>
+  <div class="sticker" data-in="1.8" data-anim="up" style="width:900px;margin-top:60px;padding:30px 30px 20px;position:relative">
+    <svg viewBox="0 0 840 330" width="840" height="330">
+      <path id="area" fill="rgba(147,167,132,.25)" d=""/>
+      <path id="line" fill="none" stroke="#4A2A21" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" d=""/>
+      <circle id="dot" r="16" fill="#93A784" stroke="#4A2A21" stroke-width="5" cx="-50" cy="-50"/>
+      <g font-family="Nunito" font-weight="800" font-size="26" fill="#4A2A21" opacity=".7">
+        <text x="20" y="322">juin</text><text x="200" y="322">juil.</text><text x="380" y="322">août</text><text x="560" y="322">sept.</text><text x="740" y="322">oct.</text>
+      </g>
+    </svg>
+    <div data-in="4" data-anim="pop" data-rot="-6" style="position:absolute;right:30px;top:-40px"><span class="chip brown" style="font-size:30px">OCTOBRE AU TOP</span></div>
+  </div>
+</section>
+
+<!-- 8 · tax credit -->
+<section class="scene bg-brown" data-start="40" data-end="44.5">
+  <img class="img-st float" data-in=".2" data-anim="pop" data-rot="-3" src="assets/mascot_tax.png" style="width:640px" alt="">
+  <div class="big" data-in=".8" data-anim="pop" style="font-size:210px;margin-top:40px">50 %</div>
+  <div class="label" data-in="1.1" data-anim="up">de crédit d'impôt sur chaque séance,<br>imposable ou non</div>
+  <div class="sticker" data-in="1.8" data-anim="pop" data-rot="2" style="margin-top:60px;padding:26px 46px"><div class="label" style="font-size:40px">soit jusqu'à <b style="font-size:64px"><span data-count="12394" data-cin="1.9" data-cdur="1.5">0</span> €</b><br>remboursés à nos client·es</div></div>
+</section>
+
+<!-- 9 · outro -->
+<section class="scene grid" data-start="44.5" data-end="49">
+  <img class="img-st float" data-in=".2" data-anim="pop" data-rot="4" src="assets/mascot.png" style="width:560px" alt="">
+  <div class="hand title" data-in=".7" data-anim="up" style="font-size:150px;margin-top:40px">Merci !</div>
+  <div class="label" data-in="1.1" data-anim="up" style="margin-top:20px">Pour cette belle année<br>à prendre soin de vous</div>
+  <div data-in="1.7" data-anim="pop" data-rot="-3" style="margin-top:70px"><span class="chip sage" style="font-size:44px">APP-NOUS.FR</span></div>
+  <div class="label" data-in="2.1" data-anim="up" style="margin-top:50px;font-size:40px">@nous.zen</div>
+</section>
+
+<script>
+const FPS=30, DURATION=49;
+const scenes=[...document.querySelectorAll('.scene')];
+// progress segments
+const prog=document.getElementById('prog');
+scenes.forEach(()=>{const d=document.createElement('div');d.appendChild(document.createElement('i'));prog.appendChild(d)});
+
+// bars
+const months=[["Janv.<br>→ Mars",500],['Avril',4335],['Mai',2462],['Juin',4018],['Juil.',3138],['Août',835],['Sept.',3500],['Oct.',6000]];
+const chart=document.getElementById('chart');
+const fmt=(v,d=0)=>v.toLocaleString('fr-FR',{minimumFractionDigits:d,maximumFractionDigits:d}).replace(/ | /g,' ');
+months.forEach(([m,v],i)=>{
+  const b=document.createElement('div');b.className='bar'+(v===6000?' best':'');
+  b.innerHTML=`<div class="val" data-in="${1+i*.45+.4}" data-anim="pop">${fmt(v)} €</div><div class="col" data-bar="${1+i*.45}" style="height:${v/6000*720}px"></div><div class="m">${m}</div>`;
+  chart.appendChild(b);
+});
+// crown sticker on best bar
+chart.querySelector('.best').insertAdjacentHTML('afterbegin','<div data-in="5.2" data-anim="pop" data-rot="-8" style="position:absolute;top:-30px;left:50%;margin-left:-150px;width:300px;z-index:3"><span class="chip sage" style="font-size:26px;padding:10px 20px">RECORD</span></div>');
+chart.querySelector('.best').style.position='relative';
+
+// confetti
+const conf=document.getElementById('confetti');
+const cols=['#FFFDF8','#93A784','#4A2A21','#CFDAC2','#A9785A'];
+for(let i=0;i<46;i++){
+  const c=document.createElement('div');
+  const s=14+((i*37)%22);
+  c.className='deco conf';
+  c.style.cssText=`width:${s}px;height:${i%3?s*.5:s}px;background:${cols[i%5]};border-radius:${i%3?4:50}%;left:${(i*97)%1080}px;top:-60px`;
+  c.dataset.seed=i; conf.appendChild(c);
+}
+
+// analytics curve (sessions/jour, juin→oct, coupé sur le pic d'octobre)
+const pts=[2,8,180,255,200,258,255,210,150,90,70,105,55,80,68,100,160,248];
+const W=820,H=290,X0=10;
+const P=pts.map((v,i)=>[X0+i*(W-X0)/(pts.length-1),H-10-v/270*(H-30)]);
+let d='M'+P.map(p=>p.map(n=>n.toFixed(1)).join(' ')).join(' L');
+// smooth with Catmull-Rom
+d='M'+P[0].join(' ');
+for(let i=0;i<P.length-1;i++){const p0=P[i-1]||P[i],p1=P[i],p2=P[i+1],p3=P[i+2]||p2;
+  d+=` C${p1[0]+(p2[0]-p0[0])/6} ${p1[1]+(p2[1]-p0[1])/6},${p2[0]-(p3[0]-p1[0])/6} ${p2[1]-(p3[1]-p1[1])/6},${p2[0]} ${p2[1]}`}
+const line=document.getElementById('line'),area=document.getElementById('area'),dot=document.getElementById('dot');
+line.setAttribute('d',d);
+const LEN=line.getTotalLength();
+line.style.strokeDasharray=LEN;
+
+// easing
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eOut=x=>1-Math.pow(1-x,3);
+const eBack=x=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+
+function render(t){
+  scenes.forEach((s,i)=>{
+    const a=+s.dataset.start,b=+s.dataset.end, lt=t-a;
+    const on=t>=a&&t<b+0.7;
+    s.style.display=on?'flex':'none';
+    s.style.zIndex=i+1;
+    // circular reveal
+    if(i>0){const p=eOut(clamp(lt/0.7));s.style.clipPath=p>=1?'none':`circle(${p*130}% at 50% 110%)`}
+    prog.children[i].firstChild.style.width=clamp((t-a)/(b-a))*100+'%';
+    if(!on)return;
+    s.querySelectorAll('[data-in]').forEach(el=>{
+      const p=clamp((lt-(+el.dataset.in))/0.6), rot=+(el.dataset.rot||0);
+      let tf='';const an=el.dataset.anim;
+      if(an==='pop'){const k=eBack(p);tf=`scale(${Math.max(0,k)}) rotate(${rot+(1-p)*-14}deg)`}
+      else if(an==='up'){tf=`translateY(${(1-eOut(p))*90}px) rotate(${rot}deg)`}
+      else if(an==='left'){tf=`translateX(${(1-eOut(p))*-1100}px) rotate(${rot}deg)`}
+      else if(an==='right'){tf=`translateX(${(1-eOut(p))*1100}px) rotate(${rot}deg)`}
+      if(el.classList.contains('float'))tf+=` translateY(${Math.sin(lt*2.2)*12}px)`;
+      el.style.opacity=an==='pop'?clamp(p*3):eOut(p);
+      el.style.transform=tf;
+    });
+    s.querySelectorAll('[data-bar]').forEach(el=>{
+      const p=eBack(clamp((lt-(+el.dataset.bar))/0.8));el.style.transform=`scaleY(${Math.max(0,p)})`;
+    });
+    s.querySelectorAll('[data-count]').forEach(el=>{
+      const p=eOut(clamp((lt-(+el.dataset.cin))/(+(el.dataset.cdur||1.3))));
+      el.textContent=fmt(+el.dataset.count*p,+(el.dataset.dec||0));
+    });
+    s.querySelectorAll('.conf').forEach(c=>{
+      const i=+c.dataset.seed, st=1.3+(i%10)*.06, q=lt-st;
+      if(q<0){c.style.opacity=0;return}
+      c.style.opacity=1;
+      const y=q*(520+(i*53)%380)+Math.pow(q,2)*120, x=Math.sin(q*3+i)*40;
+      c.style.transform=`translate(${x}px,${y}px) rotate(${q*(200+i*11)}deg)`;
+    });
+    if(s.contains(line)){
+      const p=eOut(clamp((lt-2.2)/2));
+      line.style.strokeDashoffset=LEN*(1-p);
+      const pt=line.getPointAtLength(LEN*p);
+      dot.setAttribute('cx',p>0?pt.x:-50);dot.setAttribute('cy',p>0?pt.y:-50);
+      dot.setAttribute('r',16+(p>=1?Math.sin(lt*5)*3:0));
+      area.setAttribute('d',p>0?`M${X0} ${H} L${X0} ${P[0][1]} `+'':'' );
+      area.style.opacity=0;
+    }
+  });
+}
+window.render=render;window.DURATION=DURATION;window.FPS=FPS;
+render(0);
+</script>
+</body>
+</html>
