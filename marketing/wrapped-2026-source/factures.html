@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Noûs Wrapped 2026</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+:root{
+  --cream:#F7F0E5; --cream2:#EFE3D1; --brown:#D7B596; --brown-d:#A9785A; --ink:#4A2A21;
+  --sage:#CFDAC2; --sage-d:#93A784; --white:#FFFDF8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--cream);color:var(--ink);font-family:'Nunito',sans-serif}
+.hand{font-family:'Caveat',cursive;font-weight:700;text-shadow:0 8px 14px rgba(60,34,26,.45)}
+.scene{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 80px}
+.grid{background-color:var(--cream);background-image:linear-gradient(rgba(150,120,95,.13) 2px,transparent 2px),linear-gradient(90deg,rgba(150,120,95,.13) 2px,transparent 2px);background-size:54px 54px}
+.bg-sage{background:var(--sage)} .bg-brown{background:var(--brown)} .bg-cream2{background:var(--cream2)} .bg-cream{background:var(--cream)}
+[data-in]{opacity:0}
+.sticker{background:var(--white);border-radius:36px;box-shadow:0 0 0 10px var(--white),0 calc(6px + var(--l,0)*20px) calc(10px + var(--l,0)*16px) rgba(60,34,26,.36),0 calc(30px + var(--l,0)*50px) calc(42px + var(--l,0)*30px) -4px rgba(60,34,26,.68)}
+.chip{display:inline-block;background:var(--white);color:var(--ink);font-weight:900;letter-spacing:.08em;font-size:34px;padding:16px 34px;border-radius:999px;border:4px solid var(--ink);box-shadow:0 10px 0 var(--ink),0 calc(28px + var(--l,0)*40px) calc(28px + var(--l,0)*20px) -2px rgba(60,34,26,.64)}
+.chip.sage{background:var(--sage)} .chip.brown{background:var(--brown)}
+.img-st{filter:drop-shadow(0 calc(8px + var(--l,0)*14px) 8px rgba(60,34,26,.40)) drop-shadow(0 calc(32px + var(--l,0)*44px) 26px rgba(60,34,26,.62))}
+.label{font-size:46px;font-weight:800;line-height:1.25}
+.big{font-weight:900;font-size:190px;letter-spacing:-4px;line-height:1;text-shadow:0 12px 18px rgba(60,34,26,.48)}
+.title{font-size:120px;line-height:1}
+.deco{position:absolute}
+.lcard{display:flex;align-items:center;gap:40px;width:940px;padding:26px;margin-bottom:46px}
+.lcard img{width:380px;height:380px;object-fit:cover;border-radius:24px;display:block}
+.tape{position:absolute;top:-28px;left:50%;width:150px;height:48px;margin-left:-75px;background:rgba(207,218,194,.9);transform:rotate(-5deg)}
+.pgrid{display:flex;flex-wrap:wrap;justify-content:center;gap:28px 30px;width:960px}
+.pcard{width:280px;padding:14px 14px 18px;border-radius:22px}
+.pcard img{width:252px;height:252px;object-fit:cover;border-radius:14px;display:block}
+.pn{font-size:38px;white-space:nowrap;line-height:1;margin-top:12px}
+.ps{font-size:24px;font-weight:800;opacity:.75;margin-top:4px}
+.pr{font-size:22px;font-weight:900;margin-top:4px}
+.zen{position:absolute;overflow:visible;filter:drop-shadow(0 calc(5px + var(--l,0)*10px) 5px rgba(60,34,26,.40)) drop-shadow(0 calc(22px + var(--l,0)*34px) 18px rgba(60,34,26,.60))}
+/* progress bars */
+#prog{position:absolute;top:44px;left:40px;right:40px;display:flex;gap:10px;z-index:100}
+#prog div{flex:1;height:9px;border-radius:9px;background:rgba(74,42,33,.18);overflow:hidden}
+#prog i{display:block;height:100%;width:0;background:var(--ink)}
+#brand{position:absolute;top:78px;left:44px;z-index:100;display:flex;align-items:center;gap:14px;font-size:52px}
+#brand img{width:70px;filter:drop-shadow(0 8px 8px rgba(60,34,26,.56))}
+/* bars */
+.chart{display:flex;filter:none;align-items:flex-end;gap:12px;height:860px;width:960px;padding-bottom:0;border-bottom:5px solid var(--ink)}
+.bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;position:relative}
+.bar .col{width:100%;border-radius:22px 22px 6px 6px;background-color:var(--brown);background-image:linear-gradient(90deg,rgba(255,255,255,.35),rgba(255,255,255,0) 40%,rgba(74,42,33,.14));box-shadow:14px 6px 20px rgba(60,34,26,.56);border:4px solid var(--ink);border-bottom:none;transform-origin:bottom;position:relative}
+.bar .val{font-weight:900;font-size:24px;margin-bottom:12px;white-space:nowrap}
+.bar .m{position:absolute;top:100%;margin-top:14px;line-height:1.1;font-weight:800;font-size:27px;white-space:nowrap}
+.bar.best .col{background-color:var(--sage-d)}
+/* ranking */
+.rank{display:flex;align-items:center;gap:30px;width:860px;padding:22px 34px;margin:14px 0;text-align:left}
+.rank .n{flex:none;width:96px;height:96px;border-radius:50%;background:var(--ink);color:var(--cream);font-weight:900;font-size:54px;display:flex;align-items:center;justify-content:center}
+.rank .t{font-weight:900;font-size:50px;line-height:1.1}
+.rank .s{font-size:32px;font-weight:700;opacity:.7;margin-top:4px}
+/* stats */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:44px;width:900px}
+.stat{padding:34px 20px 30px}
+.stat b{display:block;font-size:110px;font-weight:900;line-height:1}
+.stat > span{font-size:36px;font-weight:800;opacity:.75}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+ <defs>
+  <filter id="stk" x="-30%" y="-30%" width="160%" height="160%">
+   <feMorphology in="SourceAlpha" operator="dilate" radius="5" result="d"/>
+   <feFlood flood-color="#FFFDF8"/><feComposite in2="d" operator="in" result="o"/>
+   <feMerge><feMergeNode in="o"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <g id="z-lotus" stroke="#4A2A21" stroke-width="2.6" stroke-linejoin="round">
+   <path d="M50 78C38 66 36 44 50 22c14 22 12 44 0 56z" fill="#F2D9C7"/>
+   <path d="M50 78C34 74 22 58 22 38c16 6 26 22 28 40z" fill="#E8C3A8"/>
+   <path d="M50 78C66 74 78 58 78 38c-16 6-26 22-28 40z" fill="#E8C3A8"/>
+   <path d="M50 80C34 82 16 74 8 60c16-4 32 4 42 20z" fill="#CFDAC2"/>
+   <path d="M50 80c16 2 34-6 42-20-16-4-32 4-42 20z" fill="#CFDAC2"/>
+  </g>
+  <g id="z-leaf" stroke="#4A2A21" stroke-width="2.6" stroke-linecap="round">
+   <path d="M30 92C40 60 52 36 74 10" fill="none"/>
+   <g fill="#B6C6A5"><ellipse cx="34" cy="68" rx="9" ry="15" transform="rotate(-55 34 68)"/><ellipse cx="50" cy="72" rx="8" ry="14" transform="rotate(35 50 72)"/><ellipse cx="44" cy="46" rx="9" ry="15" transform="rotate(-50 44 46)"/><ellipse cx="62" cy="48" rx="8" ry="14" transform="rotate(40 62 48)"/><ellipse cx="60" cy="24" rx="8" ry="13" transform="rotate(-40 60 24)"/><ellipse cx="76" cy="26" rx="7" ry="12" transform="rotate(50 76 26)"/></g>
+  </g>
+  <g id="z-stones" stroke="#4A2A21" stroke-width="2.6">
+   <ellipse cx="50" cy="82" rx="38" ry="12" fill="#A9785A"/>
+   <ellipse cx="50" cy="62" rx="29" ry="10" fill="#D7B596"/>
+   <ellipse cx="50" cy="44" rx="21" ry="8.5" fill="#B6C6A5"/>
+   <ellipse cx="50" cy="28" rx="13" ry="7" fill="#EFE3D1"/>
+  </g>
+  <g id="z-tea" stroke="#4A2A21" stroke-width="2.6" stroke-linecap="round">
+   <path d="M38 30c-6-8 6-12 0-20M52 30c-6-8 6-12 0-20" fill="none"/>
+   <path d="M70 52h6a10 10 0 0 1 0 20h-8" fill="none" stroke-width="5"/>
+   <path d="M18 40h56v18c0 18-12 28-28 28S18 76 18 58z" fill="#CFDAC2"/>
+   <path d="M10 88h72" />
+   <circle cx="46" cy="60" r="7" fill="#D7B596"/>
+  </g>
+  <g id="z-candle" stroke="#4A2A21" stroke-width="2.6" stroke-linejoin="round">
+   <path d="M50 8c10 12 10 22 0 26-10-4-10-14 0-26z" fill="#E9B98A"/>
+   <path d="M50 22c4 5 4 9 0 11-4-2-4-6 0-11z" fill="#FFF3D6"/>
+   <rect x="34" y="38" width="32" height="52" rx="6" fill="#F7F0E5"/>
+   <path d="M34 50c8 4 24 4 32 0" fill="none"/>
+  </g>
+  <g id="z-moon" stroke="#4A2A21" stroke-width="2.6" stroke-linejoin="round">
+   <path d="M58 12a38 38 0 1 0 30 52A30 30 0 1 1 58 12z" fill="#EBD3B5"/>
+   <path d="M78 18l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#B6C6A5"/>
+  </g>
+  <g id="z-heart" stroke="#4A2A21" stroke-width="2.6" stroke-linejoin="round">
+   <path d="M50 86C20 64 10 48 14 32c4-14 24-20 36-4 12-16 32-10 36 4 4 16-6 32-36 54z" fill="#E8C3A8"/>
+  </g>
+  <g id="z-spark" stroke="#4A2A21" stroke-width="2.6" stroke-linejoin="round">
+   <path d="M50 4l10 34 34 12-34 12-10 34-10-34L6 50l34-12z" fill="#B6C6A5"/>
+  </g>
+ </defs>
+</svg>
+<div id="prog"></div>
+<div id="brand"><img src="assets/mascot.png" alt=""><span class="hand">Noûs</span></div>
+
+<!-- 1 · intro -->
+<section class="scene grid" data-start="0" data-end="3">
+  <img class="img-st float" data-in=".1" data-anim="pop" data-rot="-3" src="assets/mascot_tax.png" style="width:640px" alt="">
+  <div class="hand title" data-in=".6" data-anim="up" style="font-size:150px;margin-top:40px">D'avril à octobre</div>
+  <div class="label" data-in=".9" data-anim="up" style="margin-top:24px">on s'est occupé de vos papiers</div>
+  <svg class="zen float" viewBox="0 0 100 100" width="170" height="170" data-in="1.0" data-anim="pop" data-rot="-8" style="left:70px;top:1500px"><use href="#z-lotus" filter="url(#stk)"/></svg><svg class="zen float" viewBox="0 0 100 100" width="160" height="160" data-in="1.1" data-anim="pop" data-rot="10" style="right:60px;top:220px"><use href="#z-leaf" filter="url(#stk)"/></svg><svg class="zen float" viewBox="0 0 100 100" width="90" height="90" data-in="1.2" data-anim="pop" data-rot="0" style="left:110px;top:330px"><use href="#z-spark" filter="url(#stk)"/></svg>
+</section>
+<!-- 2 · le chiffre -->
+<section class="scene bg-sage" data-start="3" data-end="8">
+  <div id="confetti"></div>
+  <div class="label" data-in=".2" data-anim="up">Nous avons émis</div>
+  <div class="sticker" data-in=".4" data-anim="pop" data-rot="-3" style="padding:10px 90px;margin:50px 0 20px"><div class="big" style="font-size:380px;letter-spacing:-10px"><span data-count="75" data-cin=".5" data-cdur="1.6">0</span></div></div>
+  <div class="hand" data-in=".9" data-anim="up" style="font-size:170px;line-height:1">factures</div>
+  <div class="label" data-in="1.3" data-anim="up" style="margin-top:30px">pour que nos client·es reçoivent<br>leur crédit d'impôt</div>
+  <div data-in="2.2" data-anim="pop" data-rot="4" style="margin-top:60px"><span class="chip brown">CRÉDIT D'IMPÔT -50 %</span></div>
+  <svg class="zen float" viewBox="0 0 100 100" width="140" height="140" data-in="2.0" data-anim="pop" data-rot="10" style="right:80px;top:250px"><use href="#z-heart" filter="url(#stk)"/></svg><svg class="zen float" viewBox="0 0 100 100" width="150" height="150" data-in="2.3" data-anim="pop" data-rot="-6" style="left:70px;top:1560px"><use href="#z-stones" filter="url(#stk)"/></svg><svg class="zen float" viewBox="0 0 100 100" width="90" height="90" data-in="2.5" data-anim="pop" data-rot="0" style="right:100px;top:1620px"><use href="#z-spark" filter="url(#stk)"/></svg>
+</section>
+<!-- 3 · fin -->
+<section class="scene bg-brown" data-start="8" data-end="11">
+  <img class="img-st float" data-in=".1" data-anim="pop" data-rot="3" src="assets/mascot_money.png" style="width:700px" alt="">
+  <div class="hand title" data-in=".5" data-anim="up" style="font-size:120px;margin-top:40px">Votre crédit d'impôt,<br>on s'en occupe !</div>
+  <div data-in=".9" data-anim="pop" data-rot="-3" style="margin-top:60px"><span class="chip sage" style="font-size:44px">APP-NOUS.FR</span></div>
+  <div class="label" data-in="1.2" data-anim="up" style="margin-top:40px;font-size:40px">@nous.zen</div>
+  <svg class="zen float" viewBox="0 0 100 100" width="150" height="150" data-in="0.8" data-anim="pop" data-rot="-8" style="left:70px;top:230px"><use href="#z-tea" filter="url(#stk)"/></svg><svg class="zen float" viewBox="0 0 100 100" width="150" height="150" data-in="1.0" data-anim="pop" data-rot="8" style="right:80px;top:1560px"><use href="#z-candle" filter="url(#stk)"/></svg>
+</section>
+<div style="display:none"><div id="chart"></div><svg><path id="area"/><path id="line" d="M0 0 L1 1"/><circle id="dot"/></svg></div>
+<script>
+const FPS=30, DURATION=11;
+const scenes=[...document.querySelectorAll('.scene')];
+// progress segments
+const prog=document.getElementById('prog');
+scenes.forEach(()=>{const d=document.createElement('div');d.appendChild(document.createElement('i'));prog.appendChild(d)});
+
+// bars
+const months=[['Janv.',500],['Févr.',500],['Mars',500],['Avril',4335],['Mai',2462],['Juin',4018],['Juil.',3138],['Août',835],['Sept.',3500],['Oct.',6000]];
+const chart=document.getElementById('chart');
+const fmt=(v,d=0)=>v.toLocaleString('fr-FR',{minimumFractionDigits:d,maximumFractionDigits:d}).replace(/ | /g,' ');
+months.forEach(([m,v],i)=>{
+  const b=document.createElement('div');b.className='bar'+(v===6000?' best':'');
+  b.innerHTML=`<div class="val" data-in="${1+i*.4+.4}" data-anim="pop">${fmt(v)} €</div><div class="col" data-bar="${1+i*.4}" style="height:${v/6000*720}px"></div><div class="m">${m}</div>`;
+  chart.appendChild(b);
+});
+// crown sticker on best bar
+chart.querySelector('.best').insertAdjacentHTML('afterbegin','<div data-in="5.4" data-anim="pop" data-rot="-8" style="position:absolute;top:-30px;left:50%;margin-left:-150px;width:300px;z-index:3"><span class="chip sage" style="font-size:26px;padding:10px 20px">RECORD</span></div>');
+chart.querySelector('.best').style.position='relative';
+chart.children[5].insertAdjacentHTML('afterbegin','<div data-in="4.3" data-anim="pop" data-rot="-3" style="position:absolute;bottom:546px;left:50%;width:280px;margin-left:-140px;z-index:3"><span class="chip sage" style="font-size:22px;padding:10px 18px;line-height:1.2;box-shadow:0 6px 0 var(--ink)">22 JUIN<br>CRÉATION DE L\'APPLI</span><div style="width:0;height:0;margin:14px auto 0;border:14px solid transparent;border-top:18px solid var(--ink);border-bottom:0"></div></div>');
+
+// confetti
+const conf=document.getElementById('confetti');
+const cols=['#FFFDF8','#93A784','#4A2A21','#CFDAC2','#A9785A'];
+for(let i=0;i<46;i++){
+  const c=document.createElement('div');
+  const s=14+((i*37)%22);
+  c.className='deco conf';
+  c.style.cssText=`width:${s}px;height:${i%3?s*.5:s}px;background:${cols[i%5]};border-radius:${i%3?4:50}%;left:${(i*97)%1080}px;top:-60px`;
+  c.dataset.seed=i; conf.appendChild(c);
+}
+
+// analytics curve (sessions/jour, juin→oct, coupé sur le pic d'octobre)
+const pts=[2,8,180,255,200,258,255,210,150,90,70,105,55,80,68,100,160,248];
+const W=820,H=290,X0=10;
+const P=pts.map((v,i)=>[X0+i*(W-X0)/(pts.length-1),H-10-v/270*(H-30)]);
+let d='M'+P.map(p=>p.map(n=>n.toFixed(1)).join(' ')).join(' L');
+// smooth with Catmull-Rom
+d='M'+P[0].join(' ');
+for(let i=0;i<P.length-1;i++){const p0=P[i-1]||P[i],p1=P[i],p2=P[i+1],p3=P[i+2]||p2;
+  d+=` C${p1[0]+(p2[0]-p0[0])/6} ${p1[1]+(p2[1]-p0[1])/6},${p2[0]-(p3[0]-p1[0])/6} ${p2[1]-(p3[1]-p1[1])/6},${p2[0]} ${p2[1]}`}
+const line=document.getElementById('line'),area=document.getElementById('area'),dot=document.getElementById('dot');
+line.setAttribute('d',d);
+const LEN=line.getTotalLength();
+line.style.strokeDasharray=LEN;
+
+// easing
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eOut=x=>1-Math.pow(1-x,3);
+const eBack=x=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+
+function render(t){
+  scenes.forEach((s,i)=>{
+    const a=+s.dataset.start,b=+s.dataset.end, lt=t-a;
+    const on=t>=a&&t<b+0.7;
+    s.style.display=on?'flex':'none';
+    s.style.zIndex=i+1;
+    // circular reveal
+    if(i>0){const p=eOut(clamp(lt/0.7));s.style.clipPath=p>=1?'none':`circle(${p*130}% at 50% 110%)`}
+    prog.children[i].firstChild.style.width=clamp((t-a)/(b-a))*100+'%';
+    if(!on)return;
+    s.querySelectorAll('[data-in]').forEach(el=>{
+      const p=clamp((lt-(+el.dataset.in))/0.6), rot=+(el.dataset.rot||0);
+      let tf='';const an=el.dataset.anim;
+      if(an==='pop'){const k=eBack(p);tf=`scale(${Math.max(0,k)}) rotate(${rot+(1-p)*-14}deg)`}
+      else if(an==='up'){tf=`translateY(${(1-eOut(p))*90}px) rotate(${rot}deg)`}
+      else if(an==='left'){tf=`translateX(${(1-eOut(p))*-1100}px) rotate(${rot}deg)`}
+      else if(an==='right'){tf=`translateX(${(1-eOut(p))*1100}px) rotate(${rot}deg)`}
+      if(el.classList.contains('float'))tf+=` translateY(${Math.sin(lt*2.2)*12}px)`;
+      el.style.opacity=an==='pop'?clamp(p*3):eOut(p);
+      el.style.setProperty('--l',(1-eOut(p)).toFixed(3));
+      el.style.transform=tf;
+    });
+    s.querySelectorAll('[data-bar]').forEach(el=>{
+      const p=eBack(clamp((lt-(+el.dataset.bar))/0.8));el.style.transform=`scaleY(${Math.max(0,p)})`;
+    });
+    s.querySelectorAll('[data-count]').forEach(el=>{
+      const p=eOut(clamp((lt-(+el.dataset.cin))/(+(el.dataset.cdur||1.3))));
+      el.textContent=fmt(+el.dataset.count*p,+(el.dataset.dec||0));
+    });
+    s.querySelectorAll('.conf').forEach(c=>{
+      const i=+c.dataset.seed, st=1.3+(i%10)*.06, q=lt-st;
+      if(q<0){c.style.opacity=0;return}
+      c.style.opacity=1;
+      const y=q*(520+(i*53)%380)+Math.pow(q,2)*120, x=Math.sin(q*3+i)*40;
+      c.style.transform=`translate(${x}px,${y}px) rotate(${q*(200+i*11)}deg)`;
+    });
+    if(s.contains(line)){
+      const p=eOut(clamp((lt-2.2)/2));
+      line.style.strokeDashoffset=LEN*(1-p);
+      const pt=line.getPointAtLength(LEN*p);
+      dot.setAttribute('cx',p>0?pt.x:-50);dot.setAttribute('cy',p>0?pt.y:-50);
+      dot.setAttribute('r',16+(p>=1?Math.sin(lt*5)*3:0));
+      area.setAttribute('d',p>0?`M${X0} ${H} L${X0} ${P[0][1]} `+'':'' );
+      area.style.opacity=0;
+    }
+  });
+}
+window.render=render;window.DURATION=DURATION;window.FPS=FPS;
+render(0);
+</script>
+</body>
+</html>

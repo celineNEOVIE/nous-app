@@ -5,15 +5,15 @@ const path = require('path');
   const mode = process.argv[2] || 'preview';
   const b = await chromium.launch();
   const p = await b.newPage({ viewport: { width: 1080, height: 1920 } });
-  await p.goto('file://' + path.resolve('index.html'));
+  await p.goto('file://' + path.resolve(process.env.HTML || 'index.html'));
   await p.evaluate(() => document.fonts.ready);
   await p.waitForTimeout(500);
   if (mode === 'preview') {
     const ts = process.argv.slice(3).map(Number);
-    for (const t of ts) { await p.evaluate(t => render(t), t); await p.screenshot({ path: `prev_${t}.png` }); }
+    for (const t of ts) { await p.evaluate(t => render(t), t); await p.screenshot({ path: `prev_${process.env.OUT ? 'f' : ''}${t}.png` }); }
   } else {
     const fps = 30, dur = await p.evaluate(() => DURATION);
-    const ff = spawn('ffmpeg', ['-y','-f','image2pipe','-framerate',String(fps),'-i','-','-c:v','libx264','-preset','medium','-crf','18','-pix_fmt','yuv420p','-movflags','+faststart','out.mp4'], { stdio: ['pipe','ignore','inherit'] });
+    const ff = spawn('ffmpeg', ['-y','-f','image2pipe','-framerate',String(fps),'-i','-','-c:v','libx264','-preset','medium','-crf','18','-pix_fmt','yuv420p','-movflags','+faststart',process.env.OUT || 'out.mp4'], { stdio: ['pipe','ignore','inherit'] });
     for (let i = 0; i < dur * fps; i++) {
       await p.evaluate(t => render(t), i / fps);
       const buf = await p.screenshot({ type: 'jpeg', quality: 95 });
